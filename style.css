@@ -7,7 +7,7 @@
   --ink-soft: #6b7560;  /* lichen grey-green */
   --accent:   #4e8b3f;  /* matcha — muted forest green */
   --rule:     #dde3d8;  /* pale celadon */
-  --serif:    'Fraunces', Georgia, serif;
+  --serif:    'Shippori Mincho', serif;
   --sans:     'DM Sans', sans-serif;
   --max:      780px;
   --gap:      clamp(2rem, 5vw, 4rem);
@@ -81,6 +81,7 @@ section + section { border-top: 1px solid var(--rule); }
 .hero-name {
   font-family: var(--serif);
   font-size: clamp(2.6rem, 7vw, 4.8rem);
+  font-weight: 600;
   line-height: 1.08;
   letter-spacing: -0.02em;
   margin-bottom: 0.3em;
