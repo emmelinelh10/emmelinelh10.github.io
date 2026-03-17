@@ -1,13 +1,13 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg:       #f9f8f5;
-  --surface:  #ffffff;
-  --ink:      #1a1916;
-  --ink-soft: #6b6960;
-  --accent:   #c8502a;
-  --rule:     #e5e3dd;
-  --serif:    'Instrument Serif', Georgia, serif;
+  --bg:       #f7f8f4;  /* shiro near-white with a breath of moss */
+  --surface:  #ffffff;  /* clean white surface */
+  --ink:      #1e2318;  /* deep forest ink */
+  --ink-soft: #6b7560;  /* lichen grey-green */
+  --accent:   #4a6741;  /* matcha muted forest green */
+  --rule:     #dde3d8;  /* pale celadon */
+  --serif:    'Fraunces', Georgia, serif;
   --sans:     'DM Sans', sans-serif;
   --max:      780px;
   --gap:      clamp(2rem, 5vw, 4rem);
@@ -24,12 +24,12 @@ body {
   font-weight: 300;
 }
 
-/* ── NAV ── */
+/* â”€â”€ NAV â”€â”€ */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
   padding: 1.1rem 2rem;
-  background: rgba(249,248,245,0.88);
+  background: rgba(247,248,244,0.88);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--rule);
 }
@@ -52,7 +52,7 @@ nav ul a {
 }
 nav ul a:hover { color: var(--accent); }
 
-/* ── LAYOUT ── */
+/* â”€â”€ LAYOUT â”€â”€ */
 main { padding-top: 4.5rem; }
 section {
   max-width: var(--max);
@@ -61,7 +61,7 @@ section {
 }
 section + section { border-top: 1px solid var(--rule); }
 
-/* ── SECTION LABELS ── */
+/* â”€â”€ SECTION LABELS â”€â”€ */
 .label {
   font-size: 0.72rem;
   font-weight: 500;
@@ -71,7 +71,7 @@ section + section { border-top: 1px solid var(--rule); }
   margin-bottom: 1.6rem;
 }
 
-/* ── HERO / ABOUT ── */
+/* â”€â”€ HERO / ABOUT â”€â”€ */
 #about { padding-top: calc(var(--gap) * 1.5); }
 .hero-name {
   font-family: var(--serif);
@@ -103,7 +103,7 @@ section + section { border-top: 1px solid var(--rule); }
 }
 .social-links a:hover { border-color: var(--accent); color: var(--accent); }
 
-/* ── SKILLS ── */
+/* â”€â”€ SKILLS â”€â”€ */
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
@@ -122,7 +122,7 @@ section + section { border-top: 1px solid var(--rule); }
 }
 .skill-tag:hover { border-color: var(--accent); color: var(--ink); }
 
-/* ── PROJECTS ── */
+/* â”€â”€ PROJECTS â”€â”€ */
 .projects-list { display: flex; flex-direction: column; gap: 0; }
 .project-item {
   display: grid;
@@ -170,7 +170,7 @@ section + section { border-top: 1px solid var(--rule); }
 }
 .project-item:hover .proj-arrow { color: var(--accent); transform: translate(3px,-3px); }
 
-/* ── PUBLICATIONS ── */
+/* â”€â”€ PUBLICATIONS â”€â”€ */
 .pub-list { display: flex; flex-direction: column; gap: 1.6rem; }
 .pub-item { display: flex; gap: 1.2rem; align-items: flex-start; }
 .pub-year {
@@ -204,7 +204,7 @@ section + section { border-top: 1px solid var(--rule); }
 }
 .pub-link:hover { border-color: var(--accent); }
 
-/* ── CONTACT ── */
+/* â”€â”€ CONTACT â”€â”€ */
 .contact-intro {
   font-size: 1rem;
   color: var(--ink-soft);
@@ -255,7 +255,7 @@ textarea { min-height: 130px; }
 }
 .btn:hover { background: var(--accent); }
 
-/* ── FOOTER ── */
+/* â”€â”€ FOOTER â”€â”€ */
 footer {
   max-width: var(--max);
   margin: 0 auto;
@@ -270,7 +270,7 @@ footer {
   color: var(--ink-soft);
 }
 
-/* ── FADE-IN ── */
+/* â”€â”€ FADE-IN â”€â”€ */
 .fade-up {
   opacity: 0;
   transform: translateY(18px);
@@ -278,7 +278,7 @@ footer {
 }
 .fade-up.visible { opacity: 1; transform: none; }
 
-/* ── RESPONSIVE ── */
+/* â”€â”€ RESPONSIVE â”€â”€ */
 @media (max-width: 520px) {
   .form-row { grid-template-columns: 1fr; }
   nav ul { gap: 1.2rem; }
