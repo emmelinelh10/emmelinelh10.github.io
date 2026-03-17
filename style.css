@@ -204,6 +204,12 @@ section + section { border-top: 1px solid var(--rule); }
   color: var(--ink-soft);
   margin-bottom: 0.5rem;
 }
+.pub-desc {
+  font-size: 0.84rem;
+  color: var(--ink-soft);
+  line-height: 1.6;
+  margin-top: 0.35rem;
+}
 .pub-links { display: flex; gap: 0.6rem; }
 .pub-link {
   font-size: 0.75rem;
