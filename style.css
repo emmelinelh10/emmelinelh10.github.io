@@ -24,6 +24,11 @@ body {
   font-weight: 300;
 }
 
+.accent-bold {
+  color: var(--accent);
+  font-weight: 500;
+}
+
 /* ── NAV ── */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
