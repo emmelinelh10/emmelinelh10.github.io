@@ -1,13 +1,13 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg:       #f2ede6;  /* aged washi paper */
-  --surface:  #faf7f2;  /* light paulownia wood */
-  --ink:      #2b2118;  /* sumi ink */
-  --ink-soft: #7a6a58;  /* weathered cedar */
-  --accent:   #8b4a2f;  /* persimmon / kakishibu */
-  --rule:     #d9cfc3;  /* pale bamboo */
-  --serif:    'Fraunces', Georgia, serif;
+  --bg:       #f9f8f5;
+  --surface:  #ffffff;
+  --ink:      #1a1916;
+  --ink-soft: #6b6960;
+  --accent:   #c8502a;
+  --rule:     #e5e3dd;
+  --serif:    'Instrument Serif', Georgia, serif;
   --sans:     'DM Sans', sans-serif;
   --max:      780px;
   --gap:      clamp(2rem, 5vw, 4rem);
@@ -29,7 +29,7 @@ nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
   padding: 1.1rem 2rem;
-  background: rgba(242,237,230,0.88);
+  background: rgba(249,248,245,0.88);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--rule);
 }
