@@ -247,6 +247,15 @@ body {
   font-family: var(--sans);
 }
 .sk-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+a.sc {
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+a.sc:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
 .sc {
   font-size: 11px; padding: 4px 10px; border-radius: 6px;
   background: rgba(0,0,0,0.05); color: rgba(0,0,0,0.65);
