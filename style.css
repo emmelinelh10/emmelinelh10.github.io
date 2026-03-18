@@ -319,7 +319,7 @@ a.sc:hover { border-color: var(--accent); color: var(--accent); }
 }
 .sd-right {
   padding: 14px; display: flex; flex-direction: column;
-  gap: 8px; min-width: 140px;
+  gap: 8px; width: 160px;
 }
 .sd-section-label {
   font-size: 10px; font-weight: 600; text-transform: uppercase;

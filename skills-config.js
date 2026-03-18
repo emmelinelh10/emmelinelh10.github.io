@@ -14,7 +14,7 @@ const SKILLS = {
       impl: 'Designed a per-working-group bucket model with lifecycle policies for data isolation and storage governance across 600+ users.',
       metrics: [
         { type: 'money',  val: '~70%', lbl: 'Cost reduction' },
-        { type: 'outage', val: '0',    lbl: 'Disk outages'   }
+        { type: 'outage', val: '0',    lbl: 'Disk outages post-migration'   }
       ]
     },
     {
@@ -22,8 +22,8 @@ const SKILLS = {
       obj:  'Move Dataiku DSS compute workloads from local execution to containerised workloads on EKS.',
       impl: 'Eliminated and reduced local execution workloads by migrating them to run as containerised jobs on EKS.',
       metrics: [
-        { type: 'perf', val: '90%', lbl: 'CPU reduced'       },
-        { type: 'time', val: '0',   lbl: 'Downtime'          }
+        { type: 'perf', val: '90%',     lbl: 'CPU reduced'       },
+        { type: 'coin', val: '50%',   lbl: 'Improved compute performance without having to increase EC2 instance type'          }
       ]
     },
     {
@@ -31,15 +31,13 @@ const SKILLS = {
       obj:  'Host and manage container images for platform and workload services.',
       impl: 'Maintained private ECR repositories with lifecycle rules and cross-account pull permissions integrated with EKS node IAM roles.',
       metrics: [
-        { type: 'outage', val: '0', lbl: 'Permission incidents' }
       ]
     },
     {
       name: 'AWS EBS',
       obj:  'Provide persistent block storage for stateful Dataiku workloads prior to S3 migration.',
-      impl: 'Managed EBS volumes via EKS storage classes before leading the architectural migration to S3 to resolve recurring disk-space outages.',
+      impl: 'Managed EBS volume before leading the architectural migration to S3 to resolve recurring disk-space outages.',
       metrics: [
-        { type: 'outage', val: '0', lbl: 'Disk outages post-migration' }
       ]
     },
     {
@@ -63,7 +61,8 @@ const SKILLS = {
       obj:  'Provision and manage platform AWS resources using infrastructure-as-code.',
       impl: 'Config-driven CloudFormation stacks so the same code is reusable across deployment regions and stays in sync between dev and prod.',
       metrics: [
-        { type: 'outage', val: '0', lbl: 'Config drift between envs' }
+        { type: 'time', val: '~75%', lbl: 'Deployment time cut' },
+        { type: 'perf', val: '~50%', lbl: 'Reduction in manual config setup' }
       ]
     },
     {
@@ -71,15 +70,7 @@ const SKILLS = {
       obj:  'Reduce breakglass access used to manually check disk breakdown of EBS and root volumes.',
       impl: 'Pushed disk utilisation metrics to CloudWatch using a cron job, then surfaced them in Grafana dashboards for visualisation.',
       metrics: [
-        { type: 'time', val: '75–80%', lbl: 'Breakglass usage reduced' }
-      ]
-    },
-    {
-      name: 'Kubernetes',
-      obj:  'Container orchestration for all Dataiku DSS platform services on EKS.',
-      impl: 'Managed RBAC, namespace isolation, custom resource definitions, and Helm-based releases across dev, staging, and prod environments.',
-      metrics: [
-        { type: 'time', val: '0', lbl: 'Downtime' }
+        { type: 'time', val: '~75%', lbl: 'Breakglass usage reduced' }
       ]
     },
     {
@@ -87,22 +78,8 @@ const SKILLS = {
       obj:  'GitOps continuous delivery for all Kubernetes platform resources.',
       impl: 'Re-engineered the Dataiku deployment pipeline using ArgoCD — declarative Git-synced app definitions with automated health checks and rollback on failure.',
       metrics: [
-        { type: 'time', val: '75%', lbl: 'Deployment time cut' }
+        { type: 'time', val: '~75%', lbl: 'Deployment time cut' }
       ]
-    },
-    {
-      name: 'Argo Workflows',
-      obj:  'Kubernetes-native workflow engine for orchestrating the Dataiku deployment pipeline.',
-      impl: 'Built DAG-based workflows on EKS to replace manual deployment steps as part of the pipeline re-engineering initiative.',
-      metrics: [
-        { type: 'time', val: '75%', lbl: 'Deployment time cut' }
-      ]
-    },
-    {
-      name: 'Linux',
-      obj:  'Primary operating environment for all day-to-day platform engineering work.',
-      impl: 'Shell scripting for automation, cron scheduling, systemd service management, and log inspection for incident triage.',
-      metrics: []
     },
   ],
   languages: [
@@ -117,8 +94,8 @@ const SKILLS = {
       obj:  'Serve as core SME for Dataiku — accountable for end-to-end platform health for 600+ global users.',
       impl: 'Manage platform infrastructure on EKS, govern project permissions, handle incident response, and built Python automation using Dataiku APIs for config-as-code and automated onboarding.',
       metrics: [
-        { type: 'time',  val: '~80%', lbl: 'Onboarding admin saved' },
-        { type: 'perf',  val: '600+', lbl: 'Users supported'        }
+        { type: 'perf',  val: '600+', lbl: 'Users supported'        },
+        { type: 'perf',  val: '20+', lbl: 'Instances managed'       }
       ]
     },
     {
@@ -127,22 +104,14 @@ const SKILLS = {
       impl: 'Developed Go-based Grafana templating for CloudWatch and Prometheus metrics; built dashboards visualising near real-time data ingestion rates with customised alert settings.',
       metrics: [
         { type: 'outage', val: '67%', lbl: 'Alert noise cut'   },
-        { type: 'outage', val: '23%', lbl: 'False alerts down' }
+        { type: 'outage', val: '80%', lbl: 'Reduction in breakglass to check metrics or logs' }
       ]
     },
     {
-      name: 'Prometheus',
-      obj:  'Provide a metrics backend for platform observability alongside Grafana.',
-      impl: 'Deployed via kube-prometheus-stack on EKS; configured scrape targets for node exporters and Dataiku application metrics feeding Grafana dashboards and Alertmanager rules.',
+      name: 'Linux',
+      obj:  'Primary operating environment for all day-to-day platform engineering work.',
+      impl: 'Shell scripting for automation, cron scheduling, systemd service management, and log inspection for incident triage.',
       metrics: []
-    },
-    {
-      name: 'Alertmanager',
-      obj:  'Reduce alert noise and improve operational response times for the platform.',
-      impl: 'Refactored Alertmanager routing trees, inhibition rules, and receiver integrations as part of the observability overhaul using Go-based Grafana templating.',
-      metrics: [
-        { type: 'outage', val: '~67%', lbl: 'Alert noise cut' }
-      ]
     },
   ],
   certs: [
