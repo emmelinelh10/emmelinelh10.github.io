@@ -268,7 +268,17 @@ a.sc:hover {
 }
 
 /* ── CONTACT ── */
-.contact-body { padding: 24px 22px; }
+.contact-body {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.contact-left {
+  flex: 1;
+}
+.contact-actions {
+  margin-top: 12px; /* was margin-bottom: 20px */
+}
 .contact-intro {
   font-size: 13px; color: var(--ink-soft);
   line-height: 1.75; margin-bottom: 18px;
@@ -318,6 +328,7 @@ a.sc:hover {
 }
 .cv-file-icon:hover .cv-file-body {
   transform: translateY(-3px);
+  margin-
   box-shadow: 0 6px 16px rgba(0,0,0,0.14);
 }
 .cv-file-fold {
