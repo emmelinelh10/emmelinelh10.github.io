@@ -312,16 +312,9 @@ body {
   opacity: 0;
   transform: translateY(4px);
   transition: opacity 0.15s, transform 0.15s;
-  position: absolute; bottom: -12px;
+  position: absolute; bottom: -10px;
   font-family: var(--sans);
 }
-.dock-dot {
-  width: 4px; height: 4px; border-radius: 50%;
-  background: rgba(0,0,0,0.4);
-  margin-top: 1px;
-  transition: opacity 0.2s;
-}
-.dock-dot.hidden { opacity: 0; }
 .dock-sep {
   width: 1px; height: 38px;
   background: rgba(0,0,0,0.15);
