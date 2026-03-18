@@ -174,7 +174,7 @@
       </div>
     </div>
 
-<!-- SKILLS WINDOW -->
+    <!-- SKILLS WINDOW -->
     <div class="window hidden" id="win-skills">
       <div class="titlebar">
         <div class="tls">
@@ -188,20 +188,7 @@
 
         <div class="sk-group">
           <div class="sk-label">Cloud &amp; Infrastructure</div>
-          <div class="sk-chips">
-            <span class="sc interactive" onclick="termShow(this,'AWS EC2','Re-engineer the Dataiku deployment pipeline to reduce deployment time.','Rebuilt the deployment pipeline on AWS EC2 using Argo Workflows and ArgoCD with GitOps-based delivery.','Reduced deployment time by 75%.')">AWS EC2</span>
-            <span class="sc interactive" onclick="termShow(this,'AWS S3','Eliminate disk-space-related outages caused by EBS-based user data storage.','Architected migration from AWS EBS to AWS S3; designed a per-working-group bucket model with lifecycle policies for data isolation and storage governance across 600+ users.','Eliminated disk-space outages with scalable, governed storage.')">AWS S3</span>
-            <span class="sc interactive" onclick="termShow(this,'AWS EKS','Run Dataiku DSS compute workloads on a managed Kubernetes cluster.','Configured EKS node groups with autoscaling, integrated ArgoCD for GitOps delivery, and managed Helm chart releases for platform services.','Stable, zero-downtime platform deployments with consistent cluster state.')">AWS EKS</span>
-            <span class="sc interactive" onclick="termShow(this,'AWS ECR','Host and manage container images for platform and workload services.','Maintained private ECR repositories with lifecycle rules and cross-account pull permissions integrated with EKS node IAM roles.','Clean image registry with secure cross-account access.')">AWS ECR</span>
-            <span class="sc interactive" onclick="termShow(this,'AWS EBS','Provide persistent block storage for stateful Dataiku workloads prior to S3 migration.','Managed EBS volumes via EKS storage classes before leading the architectural migration to S3 to resolve recurring disk-space outages.','Migration eliminated a class of production incidents affecting the full 600+ user platform.')">AWS EBS</span>
-            <span class="sc interactive" onclick="termShow(this,'AWS Redshift','Support analytical workloads for data science and finance teams on the platform.','Configured cluster access, IAM integration for S3 Spectrum queries, and workload management queues for platform users.','Enabled self-serve analytics for quants and analysts with governed, auditable access.')">AWS Redshift</span>
-            <span class="sc interactive" onclick="termShow(this,'AWS Bedrock','Build autonomous AI agents for production application health checks.','Developed autonomous agents within Dataiku Agent Hub using AWS Bedrock (Claude models) to perform health checks across multiple production applications.','Recognised with multiple awards at the company internal hackathon for innovation and operational impact.')">AWS Bedrock</span>
-            <span class="sc interactive" onclick="termShow(this,'AWS CloudFormation','Infrastructure-as-code for provisioning and managing platform AWS resources.','Authored stacks for EKS, IAM, and networking resources; integrated with CI pipelines for drift detection and reproducible provisioning.','Auditable, version-controlled infrastructure with full change history.')">AWS CloudFormation</span>
-            <span class="sc interactive" onclick="termShow(this,'Kubernetes','Container orchestration for all Dataiku DSS platform services on EKS.','Managed RBAC, namespace isolation, custom resource definitions, and Helm-based releases across dev, staging, and prod environments.','Consistent, self-healing deployments with team-level access isolation.')">Kubernetes</span>
-            <span class="sc interactive" onclick="termShow(this,'ArgoCD','GitOps continuous delivery for all Kubernetes platform resources.','Re-engineered the Dataiku deployment pipeline using ArgoCD — declarative Git-synced app definitions with automated health checks and rollback on failure.','Reduced deployment time by 75% with a full audit trail on every release.')">ArgoCD</span>
-            <span class="sc interactive" onclick="termShow(this,'Argo Workflows','Kubernetes-native workflow engine for orchestrating the Dataiku deployment pipeline.','Built DAG-based workflows on EKS to replace manual deployment steps as part of the pipeline re-engineering initiative.','Deployment time cut by 75% with fully automated, reproducible pipeline runs.')">Argo Workflows</span>
-            <span class="sc interactive" onclick="termShow(this,'Linux','Primary operating environment for all day-to-day platform engineering work.','Shell scripting for automation, cron scheduling, systemd service management, and log inspection for incident triage across production environments.','Core tooling for operating and maintaining the Dataiku platform infrastructure.')">Linux</span>
-          </div>
+          <div class="sk-chips" id="chips-cloud"></div>
           <div class="skill-terminal" id="term-cloud">
             <div class="term-bar">
               <div class="term-dot" style="background:#ff5f57"></div>
@@ -218,22 +205,12 @@
 
         <div class="sk-group">
           <div class="sk-label">Languages</div>
-          <div class="sk-chips">
-            <span class="sc">Python</span>
-            <span class="sc">Bash / Shell</span>
-            <span class="sc">Go</span>
-            <span class="sc">MATLAB</span>
-          </div>
+          <div class="sk-chips" id="chips-languages"></div>
         </div>
 
         <div class="sk-group">
           <div class="sk-label">Platforms &amp; Observability</div>
-          <div class="sk-chips">
-            <span class="sc interactive" onclick="termShow(this,'Dataiku DSS','Serve as core SME for Dataiku — accountable for end-to-end platform health for 600+ global users including traders, quants, and analysts.','Manage platform infrastructure on EKS, govern project permissions, handle incident response, and built Python automation using Dataiku APIs for config-as-code and automated onboarding.','Reduced user-onboarding admin work by ~80%; platform reliably serves all production environments.')">Dataiku DSS</span>
-            <span class="sc interactive" onclick="termShow(this,'Grafana','Improve observability of high-priority runstreams and platform infrastructure metrics.','Developed Go-based Grafana templating for CloudWatch and Prometheus metrics; built dashboards visualising near real-time data ingestion rates with customised alert settings.','Cut alert noise by ~67%; reduced false alerts by 23% during internship, sharpening operational response times.')">Grafana</span>
-            <span class="sc interactive" onclick="termShow(this,'Prometheus','Provide a metrics backend for platform observability alongside Grafana.','Deployed via kube-prometheus-stack on EKS; configured scrape targets for node exporters and Dataiku application metrics feeding Grafana dashboards and Alertmanager rules.','Consistent metrics pipeline underpinning platform-wide observability and alerting.')">Prometheus</span>
-            <span class="sc interactive" onclick="termShow(this,'Alertmanager','Reduce alert noise and improve operational response times for the platform.','Refactored Alertmanager routing trees, inhibition rules, and receiver integrations as part of the observability overhaul using Go-based Grafana templating.','Cut alert noise by ~67%, resulting in sharper and more actionable on-call notifications.')">Alertmanager</span>
-          </div>
+          <div class="sk-chips" id="chips-platforms"></div>
           <div class="skill-terminal" id="term-platforms">
             <div class="term-bar">
               <div class="term-dot" style="background:#ff5f57"></div>
@@ -250,16 +227,12 @@
 
         <div class="sk-group">
           <div class="sk-label">Certifications</div>
-          <div class="sk-chips">
-            <a class="sc cert" href="https://www.credly.com/badges/cf531f5d-0881-40ef-b431-2d4484e791f3/public_url">☁ AWS Cloud Practitioner</a>
-            <a class="sc cert" href="https://verify.skilljar.com/c/tf3cg728cxs8">◈ Dataiku Core Designer</a>
-            <a class="sc cert" href="https://verify.skilljar.com/c/udo8i56ihozd">◈ Dataiku Developer</a>
-          </div>
+          <div class="sk-chips" id="chips-certs"></div>
         </div>
 
       </div>
     </div>
-    
+
     <!-- CONTACT WINDOW -->
     <div class="window hidden" id="win-contact">
       <div class="contact-body">
@@ -314,7 +287,7 @@
       <div class="dock-label">Contact</div>
     </div>
   </div>
-
+  <script src="skills-config.js"></script>
   <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     // Clock
     function updateClock() {
