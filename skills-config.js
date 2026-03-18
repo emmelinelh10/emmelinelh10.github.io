@@ -23,7 +23,7 @@ const SKILLS = {
       impl: 'Eliminated and reduced local execution workloads by migrating them to run as containerised jobs on EKS.',
       metrics: [
         { type: 'perf', val: '90%',     lbl: 'CPU reduced'       },
-        { type: 'coin', val: '50%',   lbl: 'Improved compute performance without having to increase EC2 instance type'          }
+        { type: 'money', val: '50%',   lbl: 'Improved compute performance without having to increase EC2 instance type'          }
       ]
     },
     {
