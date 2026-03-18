@@ -325,15 +325,41 @@
     }
     
     // Terminal skill inspector
-    const termGroups = {
-      'term-cloud': ['AWS EC2','AWS S3','AWS EKS','AWS ECR','AWS EBS','AWS Redshift','AWS Bedrock','AWS CloudFormation','Kubernetes','ArgoCD','Argo Workflows','Linux'],
-      'term-platforms': ['Dataiku DSS','Grafana','Prometheus','Alertmanager']
-    };
+    const termGroupMap = { cloud: 'term-cloud', platforms: 'term-platforms' };
+
+    function renderSkills() {
+      Object.entries(SKILLS).forEach(([group, items]) => {
+        const container = document.getElementById('chips-' + group);
+        if (!container) return;
+        items.forEach(skill => {
+          if (group === 'certs') {
+            const a = document.createElement('a');
+            a.className = 'sc cert';
+            a.href = skill.url;
+            a.target = '_blank';
+            a.textContent = skill.name;
+            container.appendChild(a);
+          } else if (skill.obj) {
+            const span = document.createElement('span');
+            span.className = 'sc interactive';
+            span.textContent = skill.name;
+            span.onclick = () => termShow(span, skill.name, skill.obj, skill.impl, skill.res);
+            container.appendChild(span);
+          } else {
+            const span = document.createElement('span');
+            span.className = 'sc';
+            span.textContent = skill.name;
+            container.appendChild(span);
+          }
+        });
+      });
+    }
+    renderSkills();
+
     function termShow(chip, name, obj, impl, res) {
-      let terminalId = null;
-      for (const [id, skills] of Object.entries(termGroups)) {
-        if (skills.includes(name)) { terminalId = id; break; }
-      }
+      const terminalId = Object.entries(termGroupMap).find(([g]) =>
+        SKILLS[g] && SKILLS[g].some(s => s.name === name)
+      )?.[1];
       if (!terminalId) return;
       const group = chip.closest('.sk-group');
       group.querySelectorAll('.sc.interactive').forEach(c => c.classList.remove('active'));
@@ -350,6 +376,7 @@
         `<span class="term-divider">────────────────────────────────────</span><br>` +
         `<span class="term-cursor"></span>`;
     }
+    
   </script>
 
 </body>
