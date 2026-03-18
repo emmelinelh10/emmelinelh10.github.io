@@ -272,12 +272,10 @@ a.sc:hover {
   display: flex;
   align-items: center;
   gap: 20px;
+  padding: 24px 22px;
 }
 .contact-left {
   flex: 1;
-}
-.contact-actions {
-  margin-top: 12px; /* was margin-bottom: 20px */
 }
 .contact-intro {
   font-size: 13px; color: var(--ink-soft);
@@ -298,7 +296,7 @@ a.sc:hover {
 /* ── CONTACT ACTIONS ── */
 .contact-actions {
   display: flex; gap: 8px; flex-wrap: wrap;
-  margin-bottom: 20px;
+  margin-top: 12px;
 }
 .contact-btn-cv {
   background: transparent;
@@ -328,7 +326,6 @@ a.sc:hover {
 }
 .cv-file-icon:hover .cv-file-body {
   transform: translateY(-3px);
-  margin-
   box-shadow: 0 6px 16px rgba(0,0,0,0.14);
 }
 .cv-file-fold {
