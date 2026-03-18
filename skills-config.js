@@ -1,52 +1,77 @@
 const SKILLS = {
   cloud: [
     {
-      name: 'AWS EC2',
-      obj:  'Deploy and host Dataiku DSS on AWS EC2.',
-      impl: 'Refactored the installation script to make the base image deployment more lightweight.',
-      res:  'Reduced deployment time by 50%.'
+        name: 'AWS EC2',
+        obj:  'Deploy and host Dataiku DSS on AWS EC2.',
+        impl: 'Refactored the installation script to make the base image deployment more lightweight.',
+        res:  'Reduced deployment time by 50%.'
     },
     {
-      name: 'AWS S3',
-      obj:  'Eliminate disk-space-related outages caused by EBS-based user data storage.',
-      impl: 'Designed a per-working-group bucket model with lifecycle policies for data isolation and storage governance across 600+ users.',
-      res:  'Eliminated disk-space outages and reduced storage cost by approximately ~70%.'
+        name: 'AWS S3',
+        obj:  'Eliminate disk-space-related outages caused by EBS-based user data storage.',
+        impl: 'Designed a per-working-group bucket model with lifecycle policies for data isolation and storage governance across 600+ users.',
+        res:  'Eliminated disk-space outages and reduced storage cost by approximately ~70%.'
     },
     {
-      name: 'AWS EKS',
-      obj:  'Move Dataiku DSS compute workloads from local execution to containerised workloads on EKS.',
-      impl: 'Eliminated and reduced local execution workloads by migrating them to run as containerised jobs on EKS.',
-      res:  'Reduced CPU utilisation on AWS EC2 and reliance on backend execution by 90%.'
+        name: 'AWS EKS',
+        obj:  'Move Dataiku DSS compute workloads from local execution to containerised workloads on EKS.',
+        impl: 'Eliminated and reduced local execution workloads by migrating them to run as containerised jobs on EKS.',
+        res:  'Reduced CPU utilisation on AWS EC2 and reliance on backend execution by 90%.'
     },
     {
-      name: 'AWS Bedrock',
-      obj:  'Build autonomous AI agents for production application health checks.',
-      impl: 'Developed autonomous agents within Dataiku Agent Hub using AWS Bedrock (Claude models) to perform health checks across multiple production applications.',
-      res:  'Recognised with multiple awards at the company internal hackathon for innovation and operational impact.'
+        name: 'AWS Bedrock',
+        obj:  'Build autonomous AI agents for production application health checks.',
+        impl: 'Developed autonomous agents within Dataiku Agent Hub using AWS Bedrock (Claude models) to perform health checks across multiple production applications.',
+        res:  'Recognised with multiple awards at the company internal hackathon for innovation and operational impact.'
     },
     {
-      name: 'AWS CloudFormation',
-      obj:  'Provision and manage platform AWS resources using infrastructure-as-code.',
-      impl: 'Config-driven CloudFormation stacks so the same code is reusable across deployment regions and stays in sync between dev and prod.',
-      res:  'No config drift between environments, reusable across regions.'
+        name: 'AWS CloudFormation',
+        obj:  'Provision and manage platform AWS resources using infrastructure-as-code.',
+        impl: 'Config-driven CloudFormation stacks so the same code is reusable across deployment regions and stays in sync between dev and prod.',
+        res:  'No config drift between environments, reusable across regions.'
     },
     {
-      name: 'AWS Redshift',
-      obj:  'Eliminate reliance on the master role for S3-to-Redshift data loading.',
-      impl: 'Implemented IAM role chaining so Redshift could assume a scoped S3 access role for COPY operations, replacing the master role with a least-privilege alternative.',
-      res:  'Removed master role dependency from the data loading pipeline, reducing blast radius of any credential compromise.'
+        name: 'AWS Redshift',
+        obj:  'Eliminate reliance on the master role for S3-to-Redshift data loading.',
+        impl: 'Implemented IAM role chaining so Redshift could assume a scoped S3 access role for COPY operations, replacing the master role with a least-privilege alternative.',
+        res:  'Removed master role dependency from the data loading pipeline, reducing blast radius of any credential compromise.'
     },
     {
-      name: 'AWS CloudWatch',
-      obj:  'Reduce breakglass access used to manually check disk breakdown of EBS and root volumes.',
-      impl: 'Pushed disk utilisation metrics to CloudWatch using a cron job, then surfaced them in Grafana dashboards for visualisation — eliminating the need to log in to the instance for routine checks.',
-      res:  'Eliminated ad-hoc breakglass usage for routine disk checks by 75-80%.'
+        name: 'AWS CloudWatch',
+        obj:  'Reduce breakglass access used to manually check disk breakdown of EBS and root volumes.',
+        impl: 'Pushed disk utilisation metrics to CloudWatch using a cron job, then surfaced them in Grafana dashboards for visualisation — eliminating the need to log in to the instance for routine checks.',
+        res:  'Eliminated ad-hoc breakglass usage for routine disk checks by 75-80%'
     },
     {
-      name: 'Argo Workflows',
-      obj:  'GitOps continuous delivery for all Kubernetes platform resources.',
-      impl: 'Re-engineered the Dataiku deployment pipeline using Argo Workflows.',
-      res:  'Reduced deployment time by 50-75% with a full audit trail on every release.'
+        name: 'ArgoWorkflows',
+        obj:  'GitOps continuous delivery for all Kubernetes platform resources.',
+        impl: 'Re-engineered the Dataiku deployment pipeline using ArgoWorkflows',
+        res:  'Reduced deployment time by 50-75% with a full audit trail on every release.'
+    }
+  ],
+  languages: [
+    { name: 'Python' },
+    { name: 'Bash / Shell' },
+    { name: 'Go' },
+    { name: 'MATLAB' },
+  ],
+  platforms: [
+    {
+      name: 'Dataiku DSS',
+      obj:  'Serve as core SME for Dataiku — accountable for end-to-end platform health for 600+ global users including traders, quants, and analysts.',
+      impl: 'Manage platform infrastructure on EKS, govern project permissions, handle incident response, and built Python automation using Dataiku APIs for config-as-code and automated onboarding.',
+    },
+    {
+      name: 'Grafana',
+      obj:  'Improve observability of high-priority runstreams and platform infrastructure metrics.',
+      impl: 'Developed Go-based Grafana templating for CloudWatch and Prometheus metrics; built dashboards visualising near real-time data ingestion rates with customised alert settings.',
+      res:  'Cut alert noise by ~67%; reduced false alerts by 23% during internship, sharpening operational response times.'
+    },
+    {
+      name: 'Linux',
+      obj:  'Primary operating environment for all day-to-day platform engineering work.',
+      impl: 'Shell scripting for automation, cron scheduling, systemd service management, and log inspection for incident triage across production environments.',
+      res:  'Core tooling for operating and maintaining the Dataiku platform infrastructure.'
     },
   ],
   certs: [
