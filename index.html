@@ -189,7 +189,7 @@
         <div class="sk-group">
           <div class="sk-label">Cloud &amp; Infrastructure</div>
           <div class="sk-chips" id="chips-cloud"></div>
-          <div class="skill-terminal" id="term-cloud">
+          <div class="skill-drawer" id="drawer-cloud">
             <div class="term-bar">
               <div class="term-dot" style="background:#ff5f57"></div>
               <div class="term-dot" style="background:#febc2e"></div>
@@ -211,7 +211,7 @@
         <div class="sk-group">
           <div class="sk-label">Platforms &amp; Observability</div>
           <div class="sk-chips" id="chips-platforms"></div>
-          <div class="skill-terminal" id="term-platforms">
+          <div class="skill-drawer" id="drawer-platforms">
             <div class="term-bar">
               <div class="term-dot" style="background:#ff5f57"></div>
               <div class="term-dot" style="background:#febc2e"></div>
@@ -324,58 +324,105 @@
       if (dot) dot.classList.add('hidden');
     }
     
-    // Terminal skill inspector
-    const termGroupMap = { cloud: 'term-cloud', platforms: 'term-platforms' };
+    const METRIC_STYLES = {
+  time:   { bg: '#EAF3DE', stroke: '#27500A', path: '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>' },
+  money:  { bg: '#FAEEDA', stroke: '#854F0B', path: '<circle cx="12" cy="12" r="10"/><path d="M12 6v2m0 8v2M9 10h4.5a1.5 1.5 0 0 1 0 3h-3a1.5 1.5 0 0 0 0 3H15"/>' },
+  outage: { bg: '#E1F5EE', stroke: '#085041', path: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>' },
+  perf:   { bg: '#EEEDFE', stroke: '#3C3489', path: '<polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>' },
+};
 
-    function renderSkills() {
-      Object.entries(SKILLS).forEach(([group, items]) => {
-        const container = document.getElementById('chips-' + group);
-        if (!container) return;
-        items.forEach(skill => {
-          if (group === 'certs') {
-            const a = document.createElement('a');
-            a.className = 'sc cert';
-            a.href = skill.url;
-            a.target = '_blank';
-            a.textContent = skill.name;
-            container.appendChild(a);
-          } else if (skill.obj) {
-            const span = document.createElement('span');
-            span.className = 'sc interactive';
-            span.textContent = skill.name;
-            span.onclick = () => termShow(span, skill.name, skill.obj, skill.impl, skill.res);
-            container.appendChild(span);
-          } else {
-            const span = document.createElement('span');
-            span.className = 'sc';
-            span.textContent = skill.name;
-            container.appendChild(span);
-          }
-        });
-      });
-    }
-    renderSkills();
+function metricIco(type, size) {
+  const m = METRIC_STYLES[type];
+  return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="${m.stroke}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${m.path}</svg>`;
+}
 
-    function termShow(chip, name, obj, impl, res) {
-      const terminalId = Object.entries(termGroupMap).find(([g]) =>
-        SKILLS[g] && SKILLS[g].some(s => s.name === name)
-      )?.[1];
-      if (!terminalId) return;
-      const group = chip.closest('.sk-group');
-      group.querySelectorAll('.sc.interactive').forEach(c => c.classList.remove('active'));
-      chip.classList.add('active');
-      const terminal = document.getElementById(terminalId);
-      const body = document.getElementById(terminalId + '-body');
-      terminal.classList.add('open');
-      body.innerHTML =
-        `<span class="term-prompt">$</span> <span class="term-cmd">inspect skill</span> <span class="term-arg">${name}</span><br>` +
-        `<span class="term-divider">────────────────────────────────────</span><br>` +
-        `<span class="term-key">objective    </span><span class="term-arrow">→ </span><span class="term-val">${obj}</span><br>` +
-        `<span class="term-key">implementation</span><span class="term-arrow">→ </span><span class="term-val">${impl}</span><br>` +
-        `<span class="term-key">result       </span><span class="term-arrow">→ </span><span class="term-val">${res}</span><br>` +
-        `<span class="term-divider">────────────────────────────────────</span><br>` +
-        `<span class="term-cursor"></span>`;
-    }
+function renderSkills() {
+  Object.entries(SKILLS).forEach(([group, items]) => {
+    const container = document.getElementById('chips-' + group);
+    if (!container) return;
+    items.forEach(skill => {
+      if (group === 'certs') {
+        const a = document.createElement('a');
+        a.className = 'sc cert';
+        a.href = skill.url;
+        a.target = '_blank';
+        a.textContent = skill.name;
+        container.appendChild(a);
+      } else if (skill.obj) {
+        const span = document.createElement('span');
+        span.className = 'sc interactive';
+        span.textContent = skill.name;
+        span.onclick = () => showDrawer(span, group, skill);
+        container.appendChild(span);
+      } else {
+        const span = document.createElement('span');
+        span.className = 'sc';
+        span.textContent = skill.name;
+        container.appendChild(span);
+      }
+    });
+  });
+}
+
+const drawerGroups = ['cloud', 'platforms'];
+let activeChip = null;
+
+function showDrawer(chip, group, skill) {
+  const drawerId = 'drawer-' + group;
+  const drawer = document.getElementById(drawerId);
+  if (!drawer) return;
+
+  if (activeChip === chip && drawer.classList.contains('open')) {
+    drawer.classList.remove('open');
+    chip.classList.remove('active');
+    activeChip = null;
+    return;
+  }
+
+  drawerGroups.forEach(g => {
+    const d = document.getElementById('drawer-' + g);
+    if (d) d.classList.remove('open');
+  });
+  document.querySelectorAll('.sc.interactive').forEach(c => c.classList.remove('active'));
+
+  const metricsHtml = skill.metrics && skill.metrics.length
+    ? `<div class="sd-impact-label">Impact</div>` +
+      skill.metrics.map(m => `
+        <div class="sd-metric">
+          <div class="sd-metric-ico" style="background:${METRIC_STYLES[m.type].bg}">
+            ${metricIco(m.type, 14)}
+          </div>
+          <div>
+            <div class="sd-metric-val">${m.val}</div>
+            <div class="sd-metric-lbl">${m.lbl}</div>
+          </div>
+        </div>`).join('')
+    : '';
+
+  drawer.innerHTML = `
+    <div class="sd-inner">
+      <div class="sd-head">${skill.name}</div>
+      <div class="sd-body">
+        <div class="sd-left">
+          <div>
+            <div class="sd-section-label">Objective</div>
+            <div class="sd-section-text">${skill.obj}</div>
+          </div>
+          <div>
+            <div class="sd-section-label">Implementation</div>
+            <div class="sd-section-text">${skill.impl}</div>
+          </div>
+        </div>
+        <div class="sd-right">${metricsHtml}</div>
+      </div>
+    </div>`;
+
+  drawer.classList.add('open');
+  chip.classList.add('active');
+  activeChip = chip;
+}
+
+renderSkills();
     
   </script>
 
