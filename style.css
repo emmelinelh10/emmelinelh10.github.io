@@ -266,6 +266,55 @@ a.sc:hover {
   background: var(--accent-light); color: #3a5630;
   border-color: var(--accent-border);
 }
+.sc.interactive { cursor: pointer; }
+.sc.interactive:hover { border-color: var(--accent); color: var(--accent); }
+.sc.active {
+  background: rgba(74,103,65,0.12); color: #3a5630;
+  border-color: var(--accent);
+}
+
+/* ── TERMINAL ── */
+.skill-terminal {
+  border-radius: 10px;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.3s ease, opacity 0.25s ease, margin 0.3s ease;
+  opacity: 0;
+  margin-top: 0;
+}
+.skill-terminal.open {
+  max-height: 300px;
+  opacity: 1;
+  margin-top: 4px;
+}
+.term-bar {
+  background: #2a2f2a;
+  padding: 7px 12px;
+  display: flex; align-items: center; gap: 6px;
+}
+.term-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.term-filename { font-size: 11px; color: #666; margin-left: 6px; font-family: monospace; }
+.term-body {
+  background: #1a1f1a;
+  padding: 13px 16px;
+  font-family: monospace;
+  font-size: 12px;
+  line-height: 1.85;
+  min-height: 100px;
+}
+.term-prompt { color: #4a9a4a; }
+.term-cmd { color: #8fba8f; }
+.term-arg { color: #c8e6c8; }
+.term-divider { color: #333; }
+.term-key { color: #7ab87a; display: inline-block; min-width: 120px; }
+.term-arrow { color: #3a5630; }
+.term-val { color: #c8e6c8; }
+.term-cursor {
+  display: inline-block; width: 7px; height: 13px;
+  background: #4a6741; vertical-align: middle;
+  animation: cur 1s step-end infinite;
+}
+@keyframes cur { 0%,100%{opacity:1} 50%{opacity:0} }
 
 /* ── CONTACT ── */
 .contact-body {
