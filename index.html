@@ -11,191 +11,329 @@
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <a href="#about" class="logo">EH</a>
-    <ul>
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#publications">Papers</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
+  <!-- MENU BAR -->
+  <div class="menubar">
+    <span class="mb-logo">⌘</span>
+    <span class="mb-active">Emmeline Handojo</span>
+    <div class="mb-items">
+      <span>File</span>
+      <span>Edit</span>
+      <span>View</span>
+      <span>Window</span>
+    </div>
+    <div class="mb-right">
+      <span id="mb-clock"></span>
+    </div>
+  </div>
 
-  <main>
+  <!-- DESKTOP -->
+  <div class="desktop">
 
-    <!-- ABOUT -->
-    <section id="about">
-      <p class="label">About me</p>
-      <h1 class="hero-name fade-up"><em>Emmeline</em> Handojo</h1>
-      <p class="hero-tagline fade-up">
-        Platform &amp; data engineer building reliable, scalable systems — with the rigour of a researcher.
-      </p>
-      <p class="hero-bio fade-up">
-        I'm a <span class="accent-bold">platform and data engineer</span> for an investment bank, where I serve as a core SME for the infrastructure and operations of a Data Science & AI platform on AWS. My work spans cloud architecture, deployment automation, and observability — with a focus on making complex systems dependable at scale. I hold a <span class="accent-bold">first-class BSc in Neuroscience</span> from <span class="accent-bold">King's College London</span>, which grounded me in rigorous, data-driven thinking and a published research background in computational neuroscience.
-      </p>
-      <div class="social-links fade-up">
-        <a href="https://github.com/emmelinelh10" target="_blank">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-          GitHub
+    <!-- ABOUT WINDOW (open by default) -->
+    <div class="window" id="win-about">
+      <div class="titlebar">
+        <div class="tls">
+          <div class="tl tl-r" onclick="closeWin('about')" title="Close"></div>
+          <div class="tl tl-y"></div>
+          <div class="tl tl-g"></div>
+        </div>
+        <span class="win-title">about.md — Emmeline Handojo</span>
+      </div>
+      <div class="about-body">
+        <div class="avatar">EH</div>
+        <div class="about-info">
+          <h1 class="about-name">Emmeline Handojo</h1>
+          <p class="about-role">Platform &amp; Data Engineer · Macquarie Group · London</p>
+          <p class="about-bio">
+            I'm a platform and data engineer at an investment bank, where I serve as a core SME for the infrastructure and operations of a Data Science &amp; AI platform on AWS. My work spans cloud architecture, deployment automation, and observability — with a focus on making complex systems dependable at scale. I hold a first-class BSc in Neuroscience from King's College London, which grounded me in rigorous, data-driven thinking and a published research background in computational neuroscience.
+          </p>
+          <div class="pill-row">
+            <span class="pill pg">Platform Engineering</span>
+            <span class="pill pg">AWS · Kubernetes · ArgoCD</span>
+            <span class="pill pb">BSc Neuroscience · KCL · 1st Class</span>
+            <span class="pill pa">Proc. R. Soc. B · 2025</span>
+          </div>
+          <div class="link-row">
+            <a class="lbtn" href="https://github.com/emmelinelh10" target="_blank">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              GitHub
+            </a>
+            <a class="lbtn" href="https://linkedin.com/in/emmelinehandojo" target="_blank">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              LinkedIn
+            </a>
+            <a class="lbtn" href="mailto:emmelineliencie@gmail.com">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              Email
+            </a>
+            <a class="lbtn" href="/cv.pdf" target="_blank">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              CV / Résumé
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECTS WINDOW -->
+    <div class="window hidden" id="win-projects">
+      <div class="titlebar">
+        <div class="tls">
+          <div class="tl tl-r" onclick="closeWin('projects')" title="Close"></div>
+          <div class="tl tl-y"></div>
+          <div class="tl tl-g"></div>
+        </div>
+        <span class="win-title">projects — Finder</span>
+      </div>
+      <div class="win-content">
+
+        <a class="proj-row" href="https://doi.org/10.1098/rspb.2024.2219" target="_blank">
+          <div class="proj-ico" style="background: linear-gradient(135deg,#c8e0f8,#90c0f0);">🧠</div>
+          <div class="proj-body">
+            <div class="proj-t">Computational Modelling of Motion Perception</div>
+            <div class="proj-d">How does the brain get fooled into seeing objects speed up or slow down when moving at a constant speed? This research models a biologically-inspired, insect-derived motion detector in MATLAB — showing illusory animation emerges naturally from the algorithm's temporal filtering properties. Published in <em>Proceedings of the Royal Society B</em>.</div>
+            <div class="proj-tags">
+              <span class="ptag">MATLAB</span>
+              <span class="ptag">Computational Neuroscience</span>
+              <span class="ptag">Published</span>
+            </div>
+          </div>
+          <span class="proj-arr">↗</span>
         </a>
-        <a href="https://linkedin.com/in/emmelinehandojo" target="_blank">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-          LinkedIn
+
+        <a class="proj-row" href="https://2022.igem.wiki/kcl-uk/" target="_blank">
+          <div class="proj-ico" style="background: linear-gradient(135deg,#e8d0f8,#c090e8);">🧬</div>
+          <div class="proj-body">
+            <div class="proj-t">Symemco Therapeutics — KCL iGEM 2022</div>
+            <div class="proj-d">Selected from 100+ applicants for a King's Undergraduate Research Fellowship to represent KCL in the International Genetically Engineered Machine competition. Co-led the Science Communication and Visual Design division, translating synthetic biology research on Alzheimer's Disease into accessible public-facing content. Awarded a Silver Medal internationally.</div>
+            <div class="proj-tags">
+              <span class="ptag">Figma</span>
+              <span class="ptag">Canva</span>
+              <span class="ptag">Adobe After Effects</span>
+              <span class="ptag">HTML/CSS</span>
+              <span class="ptag">Science Communication</span>
+            </div>
+          </div>
+          <span class="proj-arr">↗</span>
         </a>
-        <a href="mailto:emmelineliencie@gmail.com">
+
+      </div>
+    </div>
+
+    <!-- PUBLICATIONS WINDOW -->
+    <div class="window hidden" id="win-publications">
+      <div class="titlebar">
+        <div class="tls">
+          <div class="tl tl-r" onclick="closeWin('publications')" title="Close"></div>
+          <div class="tl tl-y"></div>
+          <div class="tl tl-g"></div>
+        </div>
+        <span class="win-title">publications &amp; awards</span>
+      </div>
+      <div class="win-content">
+        <p class="pub-context">Research from my final year and summer studentship in computational neuroscience at King's College London.</p>
+
+        <div class="pub-row">
+          <div class="pub-yr">2025</div>
+          <div class="pub-b">
+            <div class="pub-t">Illusory speeding-up and slowing-down of objects moving at constant speed emerges from natural motion detection algorithms</div>
+            <div class="pub-m">Handojo EL, Durant S, Zanker JM, Meso AI — <em>Proceedings of the Royal Society B</em></div>
+            <a class="pub-lnk" href="https://doi.org/10.1098/rspb.2024.2219" target="_blank">Paper ↗</a>
+          </div>
+        </div>
+
+        <div class="pub-row">
+          <div class="pub-yr">2024</div>
+          <div class="pub-b">
+            <div class="abadge">🏅 Award</div>
+            <div class="pub-t">KCL Faculty of Life Sciences &amp; Medicine Summer Studentship</div>
+            <div class="pub-m">King's College London — Research Award</div>
+            <div class="pub-desc">Highly competitive studentship (valued at £1,000) awarded to only 40 students across the entire KCL Faculty of Life Sciences and Medicine, funding further research on an insect-derived motion detection model at the IoPPN.</div>
+            <a class="pub-lnk" href="/studentshipdeck.pdf" target="_blank">Deck ↗</a>
+          </div>
+        </div>
+
+        <div class="pub-row">
+          <div class="pub-yr">2022</div>
+          <div class="pub-b">
+            <div class="abadge">🏅 Fellowship</div>
+            <div class="pub-t">King's Undergraduate Research Fellowship (KURF)</div>
+            <div class="pub-m">King's College London — Research Fellowship</div>
+            <div class="pub-desc">Selected from 100+ applicants for a coveted KCL undergraduate research fellowship to join the iGEM team. Co-led Science Communication and Visual Design for a synthetic biology project on Alzheimer's Disease.</div>
+          </div>
+        </div>
+
+        <div class="pub-row">
+          <div class="pub-yr">2022</div>
+          <div class="pub-b">
+            <div class="abadge">🥈 Medal</div>
+            <div class="pub-t">International Genetically Engineered Machine (iGEM) Silver Medal</div>
+            <div class="pub-m">iGEM Foundation — International Competition Award</div>
+            <div class="pub-desc">Awarded a Silver Medal in the Overgraduate division at the iGEM competition for the KCL team's synthetic biology project on Alzheimer's Disease.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SKILLS WINDOW -->
+    <div class="window hidden" id="win-skills">
+      <div class="titlebar">
+        <div class="tls">
+          <div class="tl tl-r" onclick="closeWin('skills')" title="Close"></div>
+          <div class="tl tl-y"></div>
+          <div class="tl tl-g"></div>
+        </div>
+        <span class="win-title">skills &amp; tech</span>
+      </div>
+      <div class="skill-body">
+        <div class="sk-group">
+          <div class="sk-label">Cloud &amp; Infrastructure</div>
+          <div class="sk-chips">
+            <span class="sc">AWS EC2</span>
+            <span class="sc">AWS S3</span>
+            <span class="sc">AWS EKS</span>
+            <span class="sc">AWS ECR</span>
+            <span class="sc">AWS EBS</span>
+            <span class="sc">AWS Redshift</span>
+            <span class="sc">AWS Bedrock</span>
+            <span class="sc">AWS CloudFormation</span>
+            <span class="sc">Kubernetes</span>
+            <span class="sc">ArgoCD</span>
+            <span class="sc">Argo Workflows</span>
+            <span class="sc">Linux</span>
+          </div>
+        </div>
+        <div class="sk-group">
+          <div class="sk-label">Languages</div>
+          <div class="sk-chips">
+            <span class="sc">Python</span>
+            <span class="sc">Bash / Shell</span>
+            <span class="sc">Go</span>
+            <span class="sc">MATLAB</span>
+            <span class="sc">Git</span>
+          </div>
+        </div>
+        <div class="sk-group">
+          <div class="sk-label">Platforms &amp; Observability</div>
+          <div class="sk-chips">
+            <span class="sc">Dataiku DSS</span>
+            <span class="sc">Grafana</span>
+            <span class="sc">Prometheus</span>
+            <span class="sc">Alertmanager</span>
+          </div>
+        </div>
+        <div class="sk-group">
+          <div class="sk-label">Certifications</div>
+          <div class="sk-chips">
+            <span class="sc cert">☁ AWS Cloud Practitioner</span>
+            <span class="sc cert">◈ Dataiku Core Designer</span>
+            <span class="sc cert">◈ Dataiku Developer</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTACT WINDOW -->
+    <div class="window hidden" id="win-contact">
+      <div class="titlebar">
+        <div class="tls">
+          <div class="tl tl-r" onclick="closeWin('contact')" title="Close"></div>
+          <div class="tl tl-y"></div>
+          <div class="tl tl-g"></div>
+        </div>
+        <span class="win-title">contact</span>
+      </div>
+      <div class="contact-body">
+        <p class="contact-intro">Open to new opportunities in platform, data, and software engineering. Feel free to reach out — I'd love to hear from you.</p>
+        <a class="contact-btn" href="mailto:emmelineliencie@gmail.com">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-          Email
-        </a>
-        <a href="/cv.pdf" target="_blank">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-          CV / Résumé
+          Say hello →
         </a>
       </div>
-    </section>
+    </div>
 
-    <!-- SKILLS -->
-    <section id="skills">
-      <p class="label">Skills &amp; Tech</p>
-      <div class="skills-grid fade-up">
-        <div class="skill-tag">Python</div>
-        <div class="skill-tag">MATLAB</div>
-        <div class="skill-tag">Bash / Shell</div>
-        <div class="skill-tag">Kubernetes</div>
-        <div class="skill-tag">ArgoCD</div>
-        <div class="skill-tag">Argo Workflows</div>
-        <div class="skill-tag">Dataiku DSS</div>
-        <div class="skill-tag">Grafana</div>
-        <div class="skill-tag">Linux</div>
-        <div class="skill-tag">Git</div>
-        <div class="skill-tag">AWS EC2</div>
-        <div class="skill-tag">AWS CloudFormation</div>
-        <div class="skill-tag">AWS EBS</div>
-        <div class="skill-tag">AWS ECR</div>
-        <div class="skill-tag">AWS EKS</div>
-        <div class="skill-tag">AWS S3</div>
-        <div class="skill-tag">AWS Redshift</div>
-        <div class="skill-tag">AWS Bedrock</div>
+  </div><!-- end .desktop -->
+
+  <!-- DOCK -->
+  <div class="dock">
+    <div class="dock-item" id="dock-about" onclick="toggleWin('about')">
+      <div class="dock-app" style="background: linear-gradient(135deg,#b8d8b0,#6a9a60);">👤</div>
+      <div class="dock-dot" id="dot-about"></div>
+      <div class="dock-label">About</div>
+    </div>
+    <div class="dock-item" id="dock-projects" onclick="toggleWin('projects')">
+      <div class="dock-app" style="background: linear-gradient(135deg,#b0c8f0,#6090d8);">📁</div>
+      <div class="dock-dot hidden" id="dot-projects"></div>
+      <div class="dock-label">Projects</div>
+    </div>
+    <div class="dock-item" id="dock-publications" onclick="toggleWin('publications')">
+      <div class="dock-app" style="background: linear-gradient(135deg,#f0d890,#d8a830);">📄</div>
+      <div class="dock-dot hidden" id="dot-publications"></div>
+      <div class="dock-label">Papers</div>
+    </div>
+    <div class="dock-item" id="dock-skills" onclick="toggleWin('skills')">
+      <div class="dock-app" style="background: linear-gradient(135deg,#c0e0c8,#70b880);">🛠</div>
+      <div class="dock-dot hidden" id="dot-skills"></div>
+      <div class="dock-label">Skills</div>
+    </div>
+    <div class="dock-sep"></div>
+    <div class="dock-item" id="dock-contact" onclick="toggleWin('contact')">
+      <div class="dock-app" style="background: linear-gradient(135deg,#f0b8b0,#d87870);">✉</div>
+      <div class="dock-dot hidden" id="dot-contact"></div>
+      <div class="dock-label">Contact</div>
+    </div>
+    <div class="dock-sep"></div>
+    <div class="dock-item" onclick="window.open('https://github.com/emmelinelh10','_blank')">
+      <div class="dock-app" style="background: linear-gradient(135deg,#d0d0d0,#909090);">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
       </div>
-    </section>
-
-    <!-- PROJECTS -->
-    <section id="projects">
-      <p class="label">Projects</p>
-      <div class="projects-list">
-
-        <!-- Project 1 — Motion Detection Research -->
-        <a class="project-item fade-up" href="https://doi.org/10.1098/rspb.2024.2219" target="_blank">
-          <div>
-            <h3 class="proj-title">Computational Modelling of Motion Detection</h3>
-            <p class="proj-desc">How does the brain get fooled into seeing objects speed up or slow down when they're moving at a constant speed? This research explores that question by modelling a biologically-inspired, <span class="accent-bold">insect-derived motion detector</span> in <span class="accent-bold">MATLAB</span> — showing that illusory animation emerges naturally from the algorithm's temporal filtering properties. Findings were published in <em>Proceedings of the Royal Society B</em>.</p>
-            <div class="proj-tags">
-              <span class="proj-tag">MATLAB</span>
-              <span class="proj-tag">Computational Neuroscience</span>
-            </div>
-          </div>
-          <span class="proj-arrow">↗</span>
-        </a>
-
-        <!-- Project 2 — iGEM -->
-        <a class="project-item fade-up" href="https://2022.igem.wiki/kcl-uk/" target="_blank">
-          <div>
-            <h3 class="proj-title">Symemco Therapeutics</h3>
-            <p class="proj-desc">Selected from <span class="accent-bold">100+ applicants</span> for a King's Undergraduate Research Fellowship to represent King's College London in the International Genetically Engineered Machine (iGEM) Competition. Co-led the Science Communication and Visual Design division, translating complex synthetic biology research on Alzheimer's Disease into accessible public-facing content. The team was awarded a <span class="accent-bold">Silver Medal</span> at the international iGEM competition.</p>
-            <div class="proj-tags">
-              <span class="proj-tag">Figma</span>
-              <span class="proj-tag">Canva</span>
-              <span class="proj-tag">Adobe After Effects</span>
-              <span class="proj-tag">HTML/CSS</span>
-              <span class="proj-tag">Science Communication</span>
-            </div>
-          </div>
-          <span class="proj-arrow">↗</span>
-        </a>
-
+      <div class="dock-label">GitHub</div>
+    </div>
+    <div class="dock-item" onclick="window.open('https://linkedin.com/in/emmelinehandojo','_blank')">
+      <div class="dock-app" style="background: linear-gradient(135deg,#90c0e8,#4080c0);">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
       </div>
-    </section>
-
-    <!-- PUBLICATIONS -->
-    <section id="publications">
-      <p class="label">Publications &amp; Awards</p>
-      <p class="pub-context fade-up">Research from my final year and summer studentship in computational neuroscience at King's College London.</p>
-      <div class="pub-list">
-
-        <div class="pub-item fade-up">
-          <span class="pub-year">2025</span>
-          <div class="pub-body">
-            <p class="pub-title">Illusory speeding-up and slowing-down of objects moving at constant speed emerges from natural motion detection algorithms</p>
-            <p class="pub-meta">Handojo EL, Durant S, Zanker JM, Meso AI — <em>Proceedings of the Royal Society B</em></p>
-            <div class="pub-links">
-              <a class="pub-link" href="https://doi.org/10.1098/rspb.2024.2219" target="_blank">Paper ↗</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="pub-item fade-up">
-          <span class="pub-year">2024</span>
-          <div class="pub-body">
-            <p class="pub-title">King's College London Faculty of Life Sciences &amp; Medicine Summer Studentship</p>
-            <p class="pub-meta">King's College London — <em>Research Award</em></p>
-            <p class="pub-desc">Highly competitive studentship (valued at <span class="accent-bold">£1,000</span>) awarded to only 40 students across the entire KCL Faculty of Life Sciences and Medicine, funding further research on an insect-derived motion detection model at the Institute of Psychiatry, Psychology, and Neuroscience (IoPPN).</p>
-            <div class="pub-links">
-              <a class="pub-link" href="/studentshipdeck.pdf" target="_blank">Paper ↗</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="pub-item fade-up">
-          <span class="pub-year">2022</span>
-          <div class="pub-body">
-            <p class="pub-title">King's Undergraduate Research Fellowship (KURF)</p>
-            <p class="pub-meta">King's College London — <em>Research Fellowship</em></p>
-            <p class="pub-desc">Selected from <span class="accent-bold">100+ applicants</span> for a coveted KCL undergraduate research fellowship to join the iGEM team. Co-led Science Communication and Visual Design for a synthetic biology project on Alzheimer's Disease.</p>
-          </div>
-        </div>
-
-        <div class="pub-item fade-up">
-          <span class="pub-year">2022</span>
-          <div class="pub-body">
-            <p class="pub-title">International Genetically Engineered Machine (iGEM) Silver Medal</p>
-            <p class="pub-meta">iGEM - <em>International Competition Award</em></p>
-            <p class="pub-desc">Awarded a <span class="accent-bold">Silver Medal in the Overgraduate division</span> at the iGEM competition for the KCL team's synthetic biology project on Alzheimer's Disease.</p>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact">
-      <p class="label">Contact</p>
-      <p class="contact-intro fade-up">
-        Open to new opportunities in platform, data, and software engineering. Feel free to reach out.
-      </p>
-      <a class="btn fade-up" href="mailto:emmelineliencie@gmail.com">
-        Say hello →
-      </a>
-    </section>
-
-  </main>
-
-  <footer>
-    <span>© 2025 Emmeline Handojo</span>
-    <span>Built with GitHub Pages</span>
-  </footer>
+      <div class="dock-label">LinkedIn</div>
+    </div>
+  </div>
 
   <script>
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          observer.unobserve(e.target);
-        }
+    // Clock
+    function updateClock() {
+      const now = new Date();
+      document.getElementById('mb-clock').textContent = now.toLocaleString('en-GB', {
+        weekday: 'short', day: 'numeric', month: 'short',
+        hour: '2-digit', minute: '2-digit'
       });
-    }, { threshold: 0.12 });
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
 
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    // Window management
+    function toggleWin(id) {
+      const win = document.getElementById('win-' + id);
+      if (win.classList.contains('hidden')) {
+        openWin(id);
+      } else {
+        closeWin(id);
+      }
+    }
+
+    function openWin(id) {
+      const win = document.getElementById('win-' + id);
+      win.classList.remove('hidden');
+      const dot = document.getElementById('dot-' + id);
+      if (dot) dot.classList.remove('hidden');
+    }
+
+    function closeWin(id) {
+      const win = document.getElementById('win-' + id);
+      win.classList.add('hidden');
+      const dot = document.getElementById('dot-' + id);
+      if (dot) dot.classList.add('hidden');
+    }
   </script>
+
 </body>
 </html>

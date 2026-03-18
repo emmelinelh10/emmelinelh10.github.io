@@ -10,21 +10,35 @@ Live at: [emmelinelh10.github.io](https://emmelinelh10.github.io)
 
 ```
 emmelinelh10.github.io/
-├── index.html       # Main page — all content and markup
-├── style.css        # All styles, fonts, and layout
-├── cv.pdf           # CV / Résumé (linked from the site)
-└── README.md        # This file
+├── index.html          # Main page — all content and markup
+├── style.css           # All styles, layout, and macOS theme
+├── cv.pdf              # CV / Résumé (linked from the site)
+├── studentshipdeck.pdf # KCL FoLSM studentship deck (linked from Papers)
+└── README.md           # This file
 ```
+
+---
+
+## Design
+
+The site uses a **macOS desktop metaphor**:
+
+- A fixed **menu bar** at the top with a live clock
+- A fixed **dock** at the bottom — each icon opens a section as a floating window
+- **About** is open by default — clean first impression for recruiters
+- All other sections (Projects, Papers, Skills, Contact) open on demand via the dock
+- Windows can be closed with the red traffic light button
+- Light macOS Sonoma aesthetic — sage green wallpaper gradient, frosted glass windows
 
 ---
 
 ## Sections
 
-- **About** — Intro, tagline, and links to GitHub, LinkedIn, email, and CV
-- **Skills & Tech** — Current stack: Python, Bash, Go, AWS, Kubernetes, ArgoCD, Dataiku, Grafana, and more
-- **Projects** — Platform and data engineering work from Macquarie Group
-- **Publications** — Peer-reviewed research from computational neuroscience at King's College London
-- **Contact** — Form powered by [Formspree](https://formspree.io)
+- **About** — open by default. Name, bio, credential pills, and links to GitHub, LinkedIn, email, CV
+- **Projects** — research projects: computational motion perception paper + iGEM 2022
+- **Papers** — publications and awards: Proc. R. Soc. B paper, KCL studentship, KURF fellowship, iGEM Silver Medal
+- **Skills** — stack grouped by category: Cloud & Infra, Languages, Platforms, Certifications
+- **Contact** — mailto link to emmelineliencie@gmail.com
 
 ---
 
@@ -32,25 +46,18 @@ emmelinelh10.github.io/
 
 - Plain HTML + CSS — no frameworks, no build step
 - Hosted on [GitHub Pages](https://pages.github.com)
-- Fonts via [Google Fonts](https://fonts.google.com): Fraunces (display) + DM Sans (body)
-- Contact form via [Formspree](https://formspree.io) (free tier)
+- Fonts via [Google Fonts](https://fonts.google.com): Shippori Mincho (display) + DM Sans (body)
+- No external dependencies beyond Google Fonts
 
 ---
 
 ## Local Development
 
-No build tools needed. Just open `index.html` directly in a browser:
+No build tools needed — open `index.html` directly in a browser:
 
 ```bash
 open index.html
-# or on Linux:
-xdg-open index.html
-```
-
-Or use a simple local server to avoid any relative-path quirks:
-
-```bash
-# Python 3
+# or serve locally:
 python -m http.server 8000
 # then visit http://localhost:8000
 ```
@@ -61,26 +68,27 @@ python -m http.server 8000
 
 | What to change | Where |
 |---|---|
-| Name, bio, tagline | `index.html` → `#about` section |
-| Social / contact links | `index.html` → `.social-links` |
-| Skills | `index.html` → `#skills` section |
-| Projects | `index.html` → `#projects` section |
-| Publications | `index.html` → `#publications` section |
+| Name, bio, tagline | `index.html` → `#win-about` |
+| Social / CV links | `index.html` → `.link-row` inside `#win-about` |
+| Projects | `index.html` → `#win-projects` |
+| Publications & Awards | `index.html` → `#win-publications` |
+| Skills | `index.html` → `#win-skills` |
+| Contact | `index.html` → `#win-contact` |
 | Colours & fonts | `style.css` → `:root` variables |
-| Contact form endpoint | `index.html` → `form action="..."` |
+| Wallpaper gradient | `style.css` → `body` background |
 
 ### Colour palette
 
-All colours are defined as CSS variables in `style.css` and can be changed in one place:
+All key colours are CSS variables in `style.css`:
 
 ```css
 :root {
-  --bg:       #f7f8f4;  /* page background */
-  --surface:  #ffffff;  /* card / surface background */
-  --ink:      #1e2318;  /* primary text */
-  --ink-soft: #6b7560;  /* secondary text */
-  --accent:   #4a6741;  /* links, labels, highlights */
-  --rule:     #dde3d8;  /* borders and dividers */
+  --accent:       #4a6741;  /* matcha green — buttons, tags, links */
+  --accent-light: rgba(74,103,65,0.1);
+  --glass-bg:     rgba(255,255,255,0.82);  /* window glass */
+  --ink:          #111111;
+  --ink-soft:     rgba(0,0,0,0.55);
+  --ink-muted:    rgba(0,0,0,0.35);
 }
 ```
 
@@ -88,10 +96,9 @@ All colours are defined as CSS variables in `style.css` and can be changed in on
 
 ## Deployment
 
-This site deploys automatically via GitHub Pages on every push to `main`. No CI/CD configuration needed.
+Deploys automatically via GitHub Pages on every push to `main`.
 
-To enable GitHub Pages on a new repo:
+To enable on a new repo:
 1. Go to **Settings → Pages**
-2. Set source to **Deploy from a branch**
-3. Select `main` branch, `/ (root)` folder
-4. Save — the site will be live within ~60 seconds
+2. Source: **Deploy from a branch** → `main` / `/ (root)`
+3. Save — live within ~60 seconds
