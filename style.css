@@ -19,6 +19,8 @@
   --menubar-h:       28px;
 }
 
+strong { font-weight: 600; }
+
 html { scroll-behavior: smooth; }
 
 body {
