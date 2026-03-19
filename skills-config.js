@@ -108,10 +108,13 @@ const SKILLS = {
       ]
     },
     {
-      name: 'Linux',
-      obj:  'Primary operating environment for all day-to-day platform engineering work.',
-      impl: 'Shell scripting for automation, cron scheduling, systemd service management, and log inspection for incident triage.',
-      metrics: []
+    name: 'Streamlit',
+    obj:  'Automate the Dataiku user onboarding process utilising Dataiku Python API libraries to eliminate manual admin work and configuration mistakes.',
+    impl: 'Built a Streamlit webapp for Dataiku admins to provision user workspaces, dedicated S3 connections, code environments, and access permissions — all following least-privilege principles — in a single automated flow.',
+    metrics: [
+        { type: 'time',   val: '15 min', lbl: 'Saved per team onboarded' },
+        { type: 'outage', val: '90%',    lbl: 'Reduction in configurational mistakes' }
+    ]
     },
   ],
   certs: [
