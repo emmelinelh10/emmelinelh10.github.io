@@ -116,9 +116,6 @@ const SKILLS = {
         { type: 'outage', val: '90%',    lbl: 'Reduction in configurational mistakes' }
     ]
     },
-    {
-
-    }
   ],
   certs: [
     { name: '☁ AWS Cloud Practitioner', url: 'https://www.credly.com/badges/cf531f5d-0881-40ef-b431-2d4484e791f3/public_url' },
