@@ -187,45 +187,45 @@ body {
 .proj-arr { font-size: 13px; color: rgba(0,0,0,0.18); align-self: center; flex-shrink: 0; }
 .proj-row:hover .proj-arr { color: var(--accent); }
 
-/* ── PUBLICATIONS ── */
-.pub-context {
+/* ── ACHIEVEMENTS ── */
+.achv-context {
   font-size: 12px; color: var(--ink-muted);
   font-style: italic; padding: 12px 18px 4px;
   border-bottom: 1px solid var(--rule);
 }
-.pub-row {
+.achv-row {
   display: flex; gap: 12px;
   padding: 13px 18px;
   border-bottom: 1px solid var(--rule);
 }
-.pub-row:last-child { border-bottom: none; }
-.pub-yr {
+.achv-row:last-child { border-bottom: none; }
+.achv-yr {
   font-size: 10px; font-weight: 600;
   color: var(--ink-muted); min-width: 32px;
   padding-top: 3px; flex-shrink: 0;
   font-family: var(--sans);
 }
-.pub-b { flex: 1; }
-.pub-t {
+.achv-b { flex: 1; }
+.achv-t {
   font-family: var(--serif);
   font-size: 13px; font-weight: 500;
   color: var(--ink); margin-bottom: 3px; line-height: 1.45;
 }
-.pub-m {
+.achv-m {
   font-size: 11px; color: var(--ink-muted);
   margin-bottom: 5px;
 }
-.pub-desc {
+.achv-desc {
   font-size: 11px; color: var(--ink-soft);
   line-height: 1.6; margin-bottom: 5px;
 }
-.pub-lnk {
+.achv-lnk {
   font-size: 11px; font-weight: 500;
   color: var(--accent); text-decoration: none;
   border-bottom: 1px solid transparent;
   transition: border-color 0.15s;
 }
-.pub-lnk:hover { border-color: var(--accent); }
+.achv-lnk:hover { border-color: var(--accent); }
 .abadge {
   display: inline-flex; align-items: center; gap: 4px;
   font-size: 10px; font-weight: 500;
