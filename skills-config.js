@@ -108,14 +108,17 @@ const SKILLS = {
       ]
     },
     {
-    name: 'Streamlit',
-    obj:  'Automate the Dataiku user onboarding process utilising Dataiku Python API libraries to eliminate manual admin work and configuration mistakes.',
-    impl: 'Built a Streamlit webapp for Dataiku admins to provision user workspaces, dedicated S3 connections, code environments, and access permissions — all following least-privilege principles — in a single automated flow.',
-    metrics: [
+      name: 'Streamlit',
+      obj:  'Automate the Dataiku user onboarding process utilising Dataiku Python API libraries to eliminate manual admin work and configuration mistakes.',
+      impl: 'Built a Streamlit webapp for Dataiku admins to provision user workspaces, dedicated S3 connections, code environments, and access permissions — all following least-privilege principles — in a single automated flow.',
+      metrics: [
         { type: 'time',   val: '15 min', lbl: 'Saved per team onboarded' },
         { type: 'outage', val: '90%',    lbl: 'Reduction in configurational mistakes' }
     ]
     },
+    {
+
+    }
   ],
   certs: [
     { name: '☁ AWS Cloud Practitioner', url: 'https://www.credly.com/badges/cf531f5d-0881-40ef-b431-2d4484e791f3/public_url' },
