@@ -70,17 +70,23 @@ const SKILLS = {
       obj:  'Reduce breakglass access used to manually check disk breakdown of EBS and root volumes.',
       impl: 'Pushed disk utilisation metrics to CloudWatch using a cron job, then surfaced them in Grafana dashboards for visualisation.',
       metrics: [
-        { type: 'time', val: '~75%', lbl: 'Breakglass usage reduced' }
+        { type: 'time', val: '~75%', lbl: 'Breakglass usage reduced to check logs or metrics' }
       ]
     },
     {
-      name: 'ArgoCD',
+      name: 'ArgoCD and ArgoWorkflows',
       obj:  'GitOps continuous delivery for all Kubernetes platform resources.',
       impl: 'Re-engineered the Dataiku deployment pipeline using ArgoCD — declarative Git-synced app definitions with automated health checks and rollback on failure.',
       metrics: [
-        { type: 'time', val: '~75%', lbl: 'Deployment time cut' }
+        { type: 'time', val: '~50-75%', lbl: 'Deployment time cut' }
       ]
     },
+    {
+      name: 'Apache Airflow'
+    },
+    {
+      name: 'Trino'
+    },        
   ],
   languages: [
     { name: 'Python'     },
