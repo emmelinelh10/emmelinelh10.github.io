@@ -82,8 +82,13 @@ const SKILLS = {
       ]
     },
     {
-      name: 'Apache Airflow'
-    },
+      name: 'Apache Airflow',
+      obj:  'Automate API data ingestion into the internal S3 data lake for the Shipping Finance Commodities team.',
+      impl: 'Built Python pipelines orchestrated in Apache Airflow to pull API data and load it into S3, replacing a manual entry process.',
+      metrics: [
+        { type: 'time', val: '75%', lbl: 'Manual entry reduced' }
+      ]
+},
     {
       name: 'Trino'
     },        
