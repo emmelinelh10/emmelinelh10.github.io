@@ -14,7 +14,7 @@ const SKILLS = {
       impl: 'Designed a per-working-group bucket model with lifecycle policies for data isolation and storage governance across 600+ users.',
       metrics: [
         { type: 'money',  val: '~70%', lbl: 'Cost reduction' },
-        { type: 'outage', val: '0',    lbl: 'Disk outages post-migration'   }
+        { type: 'outage', val: '0',    lbl: 'Disk outages post-migration' }
       ]
     },
     {
@@ -22,39 +22,23 @@ const SKILLS = {
       obj:  'Move Dataiku DSS compute workloads from local execution to containerised workloads on EKS.',
       impl: 'Eliminated and reduced local execution workloads by migrating them to run as containerised jobs on EKS.',
       metrics: [
-        { type: 'perf', val: '90%',     lbl: 'CPU reduced'       },
-        { type: 'money', val: '50%',   lbl: 'Improved compute performance without having to increase EC2 instance type'          }
+        { type: 'perf', val: '90%',   lbl: 'CPU reduced' },
+        { type: 'money', val: '50%',  lbl: 'Improved compute performance without increasing EC2 instance type' }
       ]
     },
-    {
-      name: 'AWS ECR',
-      obj:  'Host and manage container images for platform and workload services.',
-      impl: 'Maintained private ECR repositories with lifecycle rules and cross-account pull permissions integrated with EKS node IAM roles.',
-      metrics: [
-      ]
-    },
-    {
-      name: 'AWS EBS',
-      obj:  'Provide persistent block storage for stateful Dataiku workloads prior to S3 migration.',
-      impl: 'Managed EBS volume before leading the architectural migration to S3 to resolve recurring disk-space outages.',
-      metrics: [
-      ]
-    },
+    { name: 'AWS ECR', obj: 'Host and manage container images for platform and workload services.', impl: 'Maintained private ECR repositories with lifecycle rules and cross-account pull permissions integrated with EKS node IAM roles.', metrics: [] },
+    { name: 'AWS EBS', obj: 'Provide persistent block storage for stateful Dataiku workloads prior to S3 migration.', impl: 'Managed EBS volume before leading the architectural migration to S3 to resolve recurring disk-space outages.', metrics: [] },
     {
       name: 'AWS Redshift',
       obj:  'Eliminate reliance on the master role for S3-to-Redshift data loading.',
       impl: 'Implemented IAM role chaining so Redshift could assume a scoped S3 access role for COPY operations, replacing the master role with a least-privilege alternative.',
-      metrics: [
-        { type: 'outage', val: '0', lbl: 'Master role exposure' }
-      ]
+      metrics: [{ type: 'outage', val: '0', lbl: 'Master role exposure' }]
     },
     {
       name: 'AWS Bedrock',
       obj:  'Build autonomous AI agents for production application health checks.',
       impl: 'Developed autonomous agents within Dataiku Agent Hub using AWS Bedrock (Claude models) to perform health checks across multiple production applications.',
-      metrics: [
-        { type: 'perf', val: '2x', lbl: 'Hackathon awards' }
-      ]
+      metrics: [{ type: 'perf', val: '2x', lbl: 'Hackathon awards' }]
     },
     {
       name: 'AWS CloudFormation',
@@ -69,35 +53,27 @@ const SKILLS = {
       name: 'AWS CloudWatch',
       obj:  'Reduce breakglass access used to manually check disk breakdown of EBS and root volumes.',
       impl: 'Pushed disk utilisation metrics to CloudWatch using a cron job, then surfaced them in Grafana dashboards for visualisation.',
-      metrics: [
-        { type: 'time', val: '~75%', lbl: 'Breakglass usage reduced to check logs or metrics' }
-      ]
+      metrics: [{ type: 'time', val: '~75%', lbl: 'Breakglass usage reduced to check logs or metrics' }]
     },
     {
       name: 'ArgoCD and ArgoWorkflows',
       obj:  'GitOps continuous delivery for all Kubernetes platform resources.',
       impl: 'Re-engineered the Dataiku deployment pipeline using ArgoCD — declarative Git-synced app definitions with automated health checks and rollback on failure.',
-      metrics: [
-        { type: 'time', val: '~50-75%', lbl: 'Deployment time cut' }
-      ]
+      metrics: [{ type: 'time', val: '~50-75%', lbl: 'Deployment time cut' }]
     },
     {
       name: 'Apache Airflow',
       obj:  'Automate API data ingestion into the internal S3 data lake for the Shipping Finance Commodities team.',
       impl: 'Built Python pipelines orchestrated in Apache Airflow to pull API data and load it into S3, replacing a manual entry process.',
-      metrics: [
-        { type: 'time', val: '75%', lbl: 'Manual entry reduced' }
-      ]
-},
-    {
-      name: 'Trino'
-    },        
+      metrics: [{ type: 'time', val: '75%', lbl: 'Manual entry reduced' }]
+    },
+    { name: 'Trino' },
   ],
   languages: [
-    { name: 'Python'     },
+    { name: 'Python' },
     { name: 'Bash / Shell' },
-    { name: 'Go'         },
-    { name: 'MATLAB'     },
+    { name: 'Go' },
+    { name: 'MATLAB' },
   ],
   platforms: [
     {
@@ -105,8 +81,8 @@ const SKILLS = {
       obj:  'Serve as core SME for Dataiku — accountable for end-to-end platform health for 600+ global users.',
       impl: 'Manage platform infrastructure on EKS, govern project permissions, handle incident response, and built Python automation using Dataiku APIs for config-as-code and automated onboarding.',
       metrics: [
-        { type: 'perf',  val: '600+', lbl: 'Users supported'        },
-        { type: 'perf',  val: '20+', lbl: 'Instances managed'       }
+        { type: 'perf', val: '600+', lbl: 'Users supported' },
+        { type: 'perf', val: '20+',  lbl: 'Instances managed' }
       ]
     },
     {
@@ -114,7 +90,7 @@ const SKILLS = {
       obj:  'Improve observability of high-priority runstreams and platform infrastructure metrics.',
       impl: 'Developed Go-based Grafana templating for CloudWatch and Prometheus metrics; built dashboards visualising near real-time data ingestion rates with customised alert settings.',
       metrics: [
-        { type: 'outage', val: '67%', lbl: 'Alert noise cut'   },
+        { type: 'outage', val: '67%', lbl: 'Alert noise cut' },
         { type: 'outage', val: '80%', lbl: 'Reduction in breakglass to check metrics or logs' }
       ]
     },
@@ -125,7 +101,7 @@ const SKILLS = {
       metrics: [
         { type: 'time',   val: '15 min', lbl: 'Saved per team onboarded' },
         { type: 'outage', val: '90%',    lbl: 'Reduction in configurational mistakes' }
-    ]
+      ]
     },
   ],
   certs: [

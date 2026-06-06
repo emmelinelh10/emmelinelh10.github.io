@@ -46,7 +46,7 @@ The site uses a **macOS desktop metaphor**:
 
 - Plain HTML + CSS — no frameworks, no build step
 - Hosted on [GitHub Pages](https://pages.github.com)
-- Fonts via [Google Fonts](https://fonts.google.com): Shippori Mincho (display) + DM Sans (body)
+- Fonts via [Google Fonts](https://fonts.google.com): Plus Jakarta Sans 800 (display) + IBM Plex Sans (body)
 - No external dependencies beyond Google Fonts
 
 ---
