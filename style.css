@@ -162,6 +162,13 @@ body {
   font-size: 0.78em;
   line-height: 1;
   vertical-align: 0.02em;
+  transform-origin: 50% 70%;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.hero-emoji:hover {
+  transform: translateY(-0.1em) scale(1.08);
+  filter: drop-shadow(0 0 10px rgba(200,224,184,0.38));
 }
 
 .hero-meta {
