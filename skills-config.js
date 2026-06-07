@@ -11,10 +11,11 @@ const SKILLS = {
     {
       name: 'AWS S3',
       obj:  'Eliminate disk-space-related outages caused by EBS-based user data storage.',
-      impl: 'Designed a per-working-group bucket model with lifecycle policies for data isolation and storage governance across 600+ users.',
+      impl: 'Designed a per-working-group bucket model with lifecycle policies for data isolation and storage governance across 600+ users, and coordinated recovery for 1M+ files during platform storage operations.',
       metrics: [
         { type: 'money',  val: '~70%', lbl: 'Cost reduction' },
-        { type: 'outage', val: '0',    lbl: 'Disk outages post-migration' }
+        { type: 'outage', val: '0',    lbl: 'Disk outages post-migration' },
+        { type: 'perf',   val: '1M+',  lbl: 'Files recovered' }
       ]
     },
     {
