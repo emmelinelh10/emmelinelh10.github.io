@@ -7,9 +7,29 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Plus+Jakarta+Sans:wght@800&display=swap" rel="stylesheet" />
+  <script>
+    const storedTheme = localStorage.getItem('theme');
+    const preferredTheme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    document.documentElement.dataset.theme = storedTheme || preferredTheme;
+  </script>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <button class="theme-toggle" type="button" aria-label="Switch to light mode" aria-pressed="false">
+    <span class="theme-toggle-knob" aria-hidden="true"></span>
+    <span class="theme-toggle-option theme-toggle-dark">
+      <svg class="theme-icon" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M21 14.4A8.2 8.2 0 0 1 9.6 3a8.2 8.2 0 1 0 11.4 11.4Z"/>
+      </svg>
+      <span>Dark</span>
+    </span>
+    <span class="theme-toggle-option theme-toggle-light">
+      <svg class="theme-icon" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 4V2m0 20v-2m8-8h2M2 12h2m13.7-5.7 1.4-1.4M4.9 19.1l1.4-1.4m0-11.4L4.9 4.9m14.2 14.2-1.4-1.4M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z"/>
+      </svg>
+      <span>Light</span>
+    </span>
+  </button>
   <svg class="icon-sprite" aria-hidden="true" focusable="false">
     <symbol id="icon-aws" viewBox="0 0 24 24">
       <path d="M6.4 13.7c-1.3 0-2.4-1-2.4-2.3 0-1.2.9-2.2 2.1-2.3.5-2.4 2.6-4.2 5.1-4.2 2 0 3.8 1.1 4.7 2.8.2 0 .4-.1.7-.1 2 0 3.7 1.6 3.7 3.7s-1.7 3.7-3.7 3.7H6.4Z"/>
@@ -374,6 +394,27 @@
     // Navigation
     const navLinks = document.querySelectorAll('.nav-link');
     const sections = document.querySelectorAll('.section');
+    const themeToggle = document.querySelector('.theme-toggle');
+
+    function setTheme(theme) {
+      const nextTheme = theme === 'light' ? 'light' : 'dark';
+      document.documentElement.dataset.theme = nextTheme;
+      localStorage.setItem('theme', nextTheme);
+      if (themeToggle) {
+        const isLight = nextTheme === 'light';
+        themeToggle.setAttribute('aria-pressed', String(isLight));
+        themeToggle.setAttribute('aria-label', isLight ? 'Switch to dark mode' : 'Switch to light mode');
+      }
+    }
+
+    setTheme(document.documentElement.dataset.theme);
+
+    if (themeToggle) {
+      themeToggle.addEventListener('click', () => {
+        const currentTheme = document.documentElement.dataset.theme;
+        setTheme(currentTheme === 'light' ? 'dark' : 'light');
+      });
+    }
 
     function showSection(id) {
       sections.forEach(s => s.classList.add('hidden'));
