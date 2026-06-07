@@ -65,6 +65,7 @@
       <a href="#home" class="logo"> E </a>
       <nav class="nav-links">
         <a href="#home" class="nav-link active" data-section="home">[ home ]</a>
+        <a href="#skills" class="nav-link" data-section="skills">[ skills ]</a>
         <a href="#projects" class="nav-link" data-section="projects">[ projects ]</a>
         <a href="#about" class="nav-link" data-section="about">[ about ]</a>
       </nav>
@@ -115,7 +116,7 @@
 
       <!-- SKILLS MARQUEE -->
       <div class="marquee-wrap">
-        <div class="marquee-label">skillsets</div>
+        <div class="marquee-label">SKILLS</div>
         <div class="marquee-track">
           <div class="marquee-item"><svg><use href="#icon-aws"></use></svg><span>AWS EC2</span></div><span class="dot">·</span>
           <div class="marquee-item"><svg><use href="#icon-cube"></use></svg><span>AWS EKS</span></div><span class="dot">·</span>
@@ -187,6 +188,19 @@
         <a href="mailto:emmelineliencie@gmail.com" class="cta-btn">Get in touch →</a>
       </div>
 
+    </section>
+
+    <!-- SKILLS PAGE -->
+    <section class="section skills-section hidden" id="skills">
+      <h1 class="page-title">Skills</h1>
+      <p class="page-subtitle">A connected view of the systems I work with, from AWS infrastructure to ML platform operations.</p>
+
+      <div class="skills-map">
+        <div class="constellation" id="constellation">
+          <svg id="line-layer" aria-hidden="true"></svg>
+        </div>
+        <aside class="constellation-panel" id="skill-panel"></aside>
+      </div>
     </section>
 
     <!-- PROJECTS PAGE -->
@@ -402,13 +416,169 @@
       history.pushState(null, '', '/');
     });
 
-    // Skill drawer logic (from original)
-    const METRIC_STYLES = {
-      time:   { bg: '#1a2a15', stroke: '#6db35a', path: '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>' },
-      money:  { bg: '#2a200a', stroke: '#d4a030', path: '<circle cx="12" cy="12" r="10"/><path d="M12 6v2m0 8v2M9 10h4.5a1.5 1.5 0 0 1 0 3h-3a1.5 1.5 0 0 0 0 3H15"/>' },
-      outage: { bg: '#0a1e1a', stroke: '#30c4a8', path: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>' },
-      perf:   { bg: '#12102a', stroke: '#7070e8', path: '<polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>' },
+    // Skills map + marquee logo polish
+    const GROUP_LABELS = {
+      cloud: 'Cloud & Infrastructure',
+      languages: 'Languages',
+      platforms: 'Platforms'
     };
+
+    const AWS_SERVICE_ICONS = {
+      'AWS EC2': 'assets/aws-icons/Arch_Amazon-EC2_64.svg',
+      'AWS EKS': 'assets/aws-icons/Arch_Amazon-Elastic-Kubernetes-Service_64.svg',
+      'AWS S3': 'assets/aws-icons/Arch_Amazon-Simple-Storage-Service_64.svg',
+      'AWS Bedrock': 'assets/aws-icons/Arch_Amazon-Bedrock_64.svg',
+      'CloudFormation': 'assets/aws-icons/Arch_AWS-CloudFormation_64.svg',
+      'AWS CloudFormation': 'assets/aws-icons/Arch_AWS-CloudFormation_64.svg',
+      'AWS Redshift': 'assets/aws-icons/Arch_Amazon-Redshift_64.svg'
+    };
+
+    const PROJECT_LOGOS = {
+      'ArgoCD': 'assets/argocd-logo.png',
+      'Apache Airflow': 'assets/airflow-logo.png',
+      'Dataiku DSS': 'assets/dataiku-logo.svg'
+    };
+
+    function brandLogoHtml(skillName) {
+      if (AWS_SERVICE_ICONS[skillName]) {
+        return '<img class="brand-mark aws-official-mark" src="' + AWS_SERVICE_ICONS[skillName] + '" alt="" aria-hidden="true">';
+      }
+      if (PROJECT_LOGOS[skillName]) {
+        return '<img class="brand-mark project-logo-mark" src="' + PROJECT_LOGOS[skillName] + '" alt="" aria-hidden="true">';
+      }
+      return '';
+    }
+
+    function fixMarqueeLogos() {
+      document.querySelectorAll('.marquee-item').forEach(item => {
+        const labelEl = item.querySelector('span:last-child');
+        const label = labelEl?.textContent.trim();
+        const logo = brandLogoHtml(label);
+        if (!logo) return;
+        item.innerHTML = logo + '<span>' + label + '</span>';
+      });
+    }
+
+    const SKILL_POSITIONS = {
+      'AWS EC2': [19, 23],
+      'AWS S3': [37, 19],
+      'AWS EKS': [63, 24],
+      'AWS Redshift': [78, 38],
+      'AWS Bedrock': [55, 51],
+      'AWS CloudFormation': [26, 48],
+      'AWS CloudWatch': [72, 66],
+      'ArgoCD and ArgoWorkflows': [45, 68],
+      'Apache Airflow': [29, 76],
+      'Dataiku DSS': [52, 39],
+      'Grafana': [84, 78],
+      'Streamlit': [61, 83],
+      'Python': [18, 61],
+      'Go': [41, 87]
+    };
+
+    const SKILL_CONNECTIONS = [
+      ['AWS S3', 'AWS Redshift'],
+      ['AWS S3', 'Dataiku DSS'],
+      ['AWS EKS', 'Dataiku DSS'],
+      ['AWS EKS', 'ArgoCD and ArgoWorkflows'],
+      ['AWS CloudFormation', 'AWS EC2'],
+      ['AWS CloudFormation', 'AWS EKS'],
+      ['AWS CloudWatch', 'Grafana'],
+      ['Apache Airflow', 'AWS S3'],
+      ['Python', 'Apache Airflow'],
+      ['Python', 'Streamlit'],
+      ['Go', 'Grafana'],
+      ['AWS Bedrock', 'Dataiku DSS']
+    ];
+
+    const constellation = document.getElementById('constellation');
+    const lineLayer = document.getElementById('line-layer');
+    const skillPanel = document.getElementById('skill-panel');
+    let activeSkill = null;
+
+    function constellationSkills() {
+      if (typeof SKILLS === 'undefined') return [];
+      return Object.entries(SKILLS).flatMap(([group, items]) => {
+        if (group === 'certs') return [];
+        return items
+          .filter(skill => skill.obj && skill.impl && SKILL_POSITIONS[skill.name])
+          .map(skill => ({ ...skill, group }));
+      });
+    }
+
+    function renderSkillLines(activeName) {
+      if (!lineLayer) return;
+      lineLayer.innerHTML = '';
+      SKILL_CONNECTIONS.forEach(([from, to]) => {
+        if (!SKILL_POSITIONS[from] || !SKILL_POSITIONS[to]) return;
+        const [x1, y1] = SKILL_POSITIONS[from];
+        const [x2, y2] = SKILL_POSITIONS[to];
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.setAttribute('x1', x1 + '%');
+        line.setAttribute('y1', y1 + '%');
+        line.setAttribute('x2', x2 + '%');
+        line.setAttribute('y2', y2 + '%');
+        line.setAttribute('class', 'constellation-line' + (from === activeName || to === activeName ? ' active' : ''));
+        lineLayer.appendChild(line);
+      });
+    }
+
+    function renderSkillPanel(skill) {
+      if (!skillPanel) return;
+      const metrics = skill.metrics && skill.metrics.length
+        ? skill.metrics.map(metric => (
+            '<div class="metric-pill">' +
+              '<div class="metric-value">' + metric.val + '</div>' +
+              '<div class="metric-label">' + metric.lbl + '</div>' +
+            '</div>'
+          )).join('')
+        : '<div class="metric-pill"><div class="metric-value">—</div><div class="metric-label">Metrics not listed</div></div>';
+
+      skillPanel.innerHTML =
+        '<div class="panel-group">' + (GROUP_LABELS[skill.group] || skill.group) + '</div>' +
+        '<h2 class="panel-title">' + skill.name + '</h2>' +
+        '<div class="panel-label">Objective</div>' +
+        '<p class="panel-text">' + skill.obj + '</p>' +
+        '<div class="panel-label">Implementation</div>' +
+        '<p class="panel-text">' + skill.impl + '</p>' +
+        '<div class="metric-grid">' + metrics + '</div>';
+    }
+
+    function setActiveSkill(skill) {
+      activeSkill = skill;
+      document.querySelectorAll('.skill-node').forEach(node => {
+        node.classList.toggle('active', node.dataset.skill === skill.name);
+      });
+      renderSkillLines(skill.name);
+      renderSkillPanel(skill);
+    }
+
+    function buildSkillConstellation() {
+      if (!constellation) return;
+      const skills = constellationSkills();
+      if (!skills.length) return;
+      skills.forEach((skill, index) => {
+        const [x, y] = SKILL_POSITIONS[skill.name];
+        const node = document.createElement('button');
+        node.className = 'skill-node node-' + skill.group;
+        node.type = 'button';
+        node.dataset.skill = skill.name;
+        node.style.setProperty('--x', x + '%');
+        node.style.setProperty('--y', y + '%');
+        node.style.setProperty('--delay', (index * -0.38) + 's');
+        node.textContent = skill.name;
+        node.addEventListener('mouseenter', () => renderSkillLines(skill.name));
+        node.addEventListener('mouseleave', () => {
+          if (activeSkill) renderSkillLines(activeSkill.name);
+        });
+        node.addEventListener('click', () => setActiveSkill(skill));
+        constellation.appendChild(node);
+      });
+      setActiveSkill(skills.find(skill => skill.name === 'Dataiku DSS') || skills[0]);
+    }
+
+    fixMarqueeLogos();
+    buildSkillConstellation();
 
     // Initial page from hash
     const hash = window.location.hash.slice(1);

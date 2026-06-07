@@ -100,6 +100,7 @@ const SKILLS = {
       impl: 'Built a Streamlit webapp for Dataiku admins to provision user workspaces, dedicated S3 connections, code environments, and access permissions — all following least-privilege principles — in a single automated flow.',
       metrics: [
         { type: 'time',   val: '15 min', lbl: 'Saved per team onboarded' },
+        { type: 'perf',   val: '50+', lbl: 'Teams onboarded across EMEA, AMER, and APAC' },
         { type: 'outage', val: '90%',    lbl: 'Reduction in configurational mistakes' }
       ]
     },

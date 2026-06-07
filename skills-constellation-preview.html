@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skills Constellation Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500&family=Plus+Jakarta+Sans:wght@800&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0d0d0d;
+      --bg-card: #161616;
+      --bg-hover: #1c1c1c;
+      --border: rgba(255,255,255,0.08);
+      --border-soft: rgba(255,255,255,0.05);
+      --ink: #f0f0f0;
+      --ink-soft: rgba(240,240,240,0.58);
+      --ink-muted: rgba(240,240,240,0.3);
+      --accent: #c8e0b8;
+      --accent-border: rgba(200,224,184,0.24);
+      --display: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      --sans: 'IBM Plex Sans', -apple-system, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    .preview-shell {
+      max-width: 1120px;
+      min-height: 100vh;
+      margin: 0 auto;
+      padding: 64px 32px;
+    }
+
+    .preview-kicker {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--ink-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .preview-title {
+      max-width: 720px;
+      font-family: var(--display);
+      font-size: clamp(2rem, 4vw, 4rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: 0;
+      margin-bottom: 18px;
+    }
+
+    .preview-copy {
+      max-width: 560px;
+      color: var(--ink-soft);
+      font-size: 14px;
+      margin-bottom: 42px;
+    }
+
+    .skills-map {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 340px;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .constellation {
+      position: relative;
+      min-height: 620px;
+      overflow: hidden;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background:
+        radial-gradient(circle at 22% 22%, rgba(200,224,184,0.08), transparent 22%),
+        radial-gradient(circle at 76% 68%, rgba(100,160,200,0.08), transparent 24%),
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: auto, auto, 48px 48px, 48px 48px;
+    }
+
+    .constellation svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .constellation-line {
+      stroke: rgba(240,240,240,0.08);
+      stroke-width: 1;
+      transition: stroke 0.2s, stroke-width 0.2s;
+    }
+
+    .constellation-line.active {
+      stroke: rgba(200,224,184,0.5);
+      stroke-width: 1.5;
+    }
+
+    .skill-node {
+      position: absolute;
+      left: var(--x);
+      top: var(--y);
+      transform: translate(-50%, -50%);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(22,22,22,0.86);
+      color: var(--ink-soft);
+      padding: 8px 11px;
+      font: inherit;
+      font-size: 12px;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      transition: transform 0.18s, border-color 0.18s, color 0.18s, background 0.18s, box-shadow 0.18s;
+      animation: nodeFloat 5.8s ease-in-out infinite;
+      animation-delay: var(--delay);
+    }
+
+    .skill-node::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 16px rgba(200,224,184,0.36);
+    }
+
+    .skill-node:hover,
+    .skill-node.active {
+      transform: translate(-50%, -50%) scale(1.04);
+      border-color: var(--accent-border);
+      color: var(--ink);
+      background: rgba(28,28,28,0.94);
+      box-shadow: 0 0 28px rgba(200,224,184,0.08);
+    }
+
+    .node-cloud::before { background: #c8e0b8; }
+    .node-platforms::before { background: #80d7cf; }
+    .node-languages::before { background: #9fb7ff; }
+
+    @keyframes nodeFloat {
+      0%, 100% { margin-top: 0; }
+      50% { margin-top: -6px; }
+    }
+
+    .skill-panel {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg-card);
+      padding: 22px;
+      min-height: 620px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .panel-group {
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+
+    .panel-title {
+      font-family: var(--display);
+      font-size: 24px;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 22px;
+    }
+
+    .panel-label {
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 7px;
+    }
+
+    .panel-text {
+      color: var(--ink-soft);
+      font-size: 13px;
+      line-height: 1.75;
+      margin-bottom: 20px;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: auto;
+      padding-top: 18px;
+      border-top: 1px solid var(--border-soft);
+    }
+
+    .metric-pill {
+      border: 1px solid var(--border-soft);
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    .metric-value {
+      font-family: var(--display);
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1.15;
+    }
+
+    .metric-label {
+      color: var(--ink-muted);
+      font-size: 11px;
+      line-height: 1.45;
+    }
+
+    @media (max-width: 860px) {
+      .preview-shell { padding: 44px 22px; }
+      .skills-map { grid-template-columns: 1fr; }
+      .constellation { min-height: 560px; }
+      .skill-panel { min-height: auto; }
+    }
+  </style>
+</head>
+<body>
+  <main class="preview-shell">
+    <div class="preview-kicker">Skills Preview</div>
+    <h1 class="preview-title">A constellation of platform work, connected by impact.</h1>
+    <p class="preview-copy">Hover or select a node to trace related skills. The detail panel turns your existing objective, implementation, and metrics data into a focused case-study view.</p>
+
+    <section class="skills-map">
+      <div class="constellation" id="constellation">
+        <svg id="line-layer" aria-hidden="true"></svg>
+      </div>
+      <aside class="skill-panel" id="skill-panel"></aside>
+    </section>
+  </main>
+
+  <script src="skills-config.js"></script>
+  <script>
+    const POSITIONS = {
+      'AWS EC2': [19, 23],
+      'AWS S3': [37, 19],
+      'AWS EKS': [63, 24],
+      'AWS Redshift': [78, 38],
+      'AWS Bedrock': [55, 51],
+      'AWS CloudFormation': [26, 48],
+      'AWS CloudWatch': [72, 66],
+      'ArgoCD and ArgoWorkflows': [45, 68],
+      'Apache Airflow': [29, 76],
+      'Dataiku DSS': [52, 39],
+      'Grafana': [84, 78],
+      'Streamlit': [61, 83],
+      'Python': [18, 61],
+      'Go': [41, 87]
+    };
+
+    const CONNECTIONS = [
+      ['AWS S3', 'AWS Redshift'],
+      ['AWS S3', 'Dataiku DSS'],
+      ['AWS EKS', 'Dataiku DSS'],
+      ['AWS EKS', 'ArgoCD and ArgoWorkflows'],
+      ['AWS CloudFormation', 'AWS EC2'],
+      ['AWS CloudFormation', 'AWS EKS'],
+      ['AWS CloudWatch', 'Grafana'],
+      ['Apache Airflow', 'AWS S3'],
+      ['Python', 'Apache Airflow'],
+      ['Python', 'Streamlit'],
+      ['Go', 'Grafana'],
+      ['AWS Bedrock', 'Dataiku DSS']
+    ];
+
+    const GROUP_LABELS = {
+      cloud: 'Cloud & Infrastructure',
+      languages: 'Languages',
+      platforms: 'Platforms'
+    };
+
+    const skills = Object.entries(SKILLS).flatMap(([group, items]) => {
+      if (group === 'certs') return [];
+      return items
+        .filter(skill => skill.obj && skill.impl && POSITIONS[skill.name])
+        .map(skill => ({ ...skill, group }));
+    });
+
+    const map = document.getElementById('constellation');
+    const svg = document.getElementById('line-layer');
+    const panel = document.getElementById('skill-panel');
+    let activeSkill = skills.find(skill => skill.name === 'Dataiku DSS') || skills[0];
+
+    function renderLines(activeName) {
+      svg.innerHTML = '';
+      CONNECTIONS.forEach(([from, to]) => {
+        if (!POSITIONS[from] || !POSITIONS[to]) return;
+        const [x1, y1] = POSITIONS[from];
+        const [x2, y2] = POSITIONS[to];
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.setAttribute('x1', x1 + '%');
+        line.setAttribute('y1', y1 + '%');
+        line.setAttribute('x2', x2 + '%');
+        line.setAttribute('y2', y2 + '%');
+        line.setAttribute('class', 'constellation-line' + (from === activeName || to === activeName ? ' active' : ''));
+        svg.appendChild(line);
+      });
+    }
+
+    function renderPanel(skill) {
+      const metrics = skill.metrics && skill.metrics.length
+        ? skill.metrics.map(metric => `
+            <div class="metric-pill">
+              <div class="metric-value">${metric.val}</div>
+              <div class="metric-label">${metric.lbl}</div>
+            </div>
+          `).join('')
+        : '<div class="metric-pill"><div class="metric-value">—</div><div class="metric-label">Metrics not listed</div></div>';
+
+      panel.innerHTML = `
+        <div class="panel-group">${GROUP_LABELS[skill.group] || skill.group}</div>
+        <h2 class="panel-title">${skill.name}</h2>
+        <div class="panel-label">Objective</div>
+        <p class="panel-text">${skill.obj}</p>
+        <div class="panel-label">Implementation</div>
+        <p class="panel-text">${skill.impl}</p>
+        <div class="metric-grid">${metrics}</div>
+      `;
+    }
+
+    function setActive(skill) {
+      activeSkill = skill;
+      document.querySelectorAll('.skill-node').forEach(node => {
+        node.classList.toggle('active', node.dataset.skill === skill.name);
+      });
+      renderLines(skill.name);
+      renderPanel(skill);
+    }
+
+    function renderNodes() {
+      skills.forEach((skill, index) => {
+        const [x, y] = POSITIONS[skill.name];
+        const node = document.createElement('button');
+        node.className = `skill-node node-${skill.group}`;
+        node.type = 'button';
+        node.dataset.skill = skill.name;
+        node.style.setProperty('--x', x + '%');
+        node.style.setProperty('--y', y + '%');
+        node.style.setProperty('--delay', (index * -0.38) + 's');
+        node.textContent = skill.name;
+        node.addEventListener('mouseenter', () => renderLines(skill.name));
+        node.addEventListener('mouseleave', () => renderLines(activeSkill.name));
+        node.addEventListener('click', () => setActive(skill));
+        map.appendChild(node);
+      });
+    }
+
+    renderNodes();
+    setActive(activeSkill);
+  </script>
+</body>
+</html>
