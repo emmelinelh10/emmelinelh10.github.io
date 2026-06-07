@@ -4,3 +4,5 @@
 ### Mobile View Enhancements
 - [ ] Fix the menu bars, instead of having them stacked at the top, move to side bar (make UI more straightforward)
 - [ ] For mobile view, toggle isn't working (day/night view) so fix that!
+### Misc
+- [ ] Update README.md
