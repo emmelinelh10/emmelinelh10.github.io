@@ -545,8 +545,10 @@
       'Dataiku DSS': [52, 39],
       'Grafana': [84, 78],
       'Streamlit': [61, 83],
-      'Python': [18, 61],
-      'Go': [41, 87]
+      'Python': [14, 58],
+      'Bash / Shell': [20, 34],
+      'MATLAB': [24, 88],
+      'Go': [78, 86]
     };
 
     const SKILL_CONNECTIONS = [
@@ -558,9 +560,6 @@
       ['AWS CloudFormation', 'AWS EKS'],
       ['AWS CloudWatch', 'Grafana'],
       ['Apache Airflow', 'AWS S3'],
-      ['Python', 'Apache Airflow'],
-      ['Python', 'Streamlit'],
-      ['Go', 'Grafana'],
       ['AWS Bedrock', 'Dataiku DSS']
     ];
 
@@ -574,7 +573,7 @@
       return Object.entries(SKILLS).flatMap(([group, items]) => {
         if (group === 'certs') return [];
         return items
-          .filter(skill => skill.obj && skill.impl && SKILL_POSITIONS[skill.name])
+          .filter(skill => SKILL_POSITIONS[skill.name] && (group === 'languages' || (skill.obj && skill.impl)))
           .map(skill => ({ ...skill, group }));
       });
     }
@@ -632,19 +631,26 @@
       if (!skills.length) return;
       skills.forEach((skill, index) => {
         const [x, y] = SKILL_POSITIONS[skill.name];
-        const node = document.createElement('button');
-        node.className = 'skill-node node-' + skill.group;
-        node.type = 'button';
+        const isLanguage = skill.group === 'languages';
+        const node = document.createElement(isLanguage ? 'span' : 'button');
+        node.className = 'skill-node node-' + skill.group + (skill.group === 'languages' ? ' language-node' : '');
+        if (!isLanguage) node.type = 'button';
         node.dataset.skill = skill.name;
         node.style.setProperty('--x', x + '%');
         node.style.setProperty('--y', y + '%');
         node.style.setProperty('--delay', (index * -0.38) + 's');
         node.textContent = skill.name;
-        node.addEventListener('mouseenter', () => renderSkillLines(skill.name));
+        node.addEventListener('mouseenter', () => {
+          if (!isLanguage) renderSkillLines(skill.name);
+        });
         node.addEventListener('mouseleave', () => {
           if (activeSkill) renderSkillLines(activeSkill.name);
         });
-        node.addEventListener('click', () => setActiveSkill(skill));
+        if (isLanguage) {
+          node.setAttribute('aria-label', skill.name + ' language node');
+        } else {
+          node.addEventListener('click', () => setActiveSkill(skill));
+        }
         constellation.appendChild(node);
       });
       setActiveSkill(skills.find(skill => skill.name === 'Dataiku DSS') || skills[0]);

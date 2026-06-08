@@ -1,104 +1,104 @@
 # emmelinelh10.github.io
 
-Personal portfolio website for Emmeline Handojo — platform & data engineer.
+Personal portfolio website for Emmeline Handojo, a platform and data engineer based in London.
 
 Live at: [emmelinelh10.github.io](https://emmelinelh10.github.io)
 
----
+## Overview
+
+This is a static portfolio site built with plain HTML, CSS, and JavaScript. It has no framework, build step, or package manager dependency.
+
+Current features:
+
+- Sidebar navigation for Home, Skills, Projects, and About
+- Dark/light theme toggle with saved preference
+- Mobile side-drawer navigation
+- Skills marquee with local SVG/PNG logo assets
+- Interactive skills constellation driven by `skills-config.js`
+- Decorative language planet nodes in the skills map
+- Responsive layouts for desktop and mobile
 
 ## Structure
 
-```
+```text
 emmelinelh10.github.io/
-├── index.html          # Main page — all content and markup
-├── style.css           # All styles, layout, and macOS theme
-├── cv.pdf              # CV / Résumé (linked from the site)
-├── studentshipdeck.pdf # KCL FoLSM studentship deck (linked from Papers)
-└── README.md           # This file
+├── index.html                  # Main markup and page interaction scripts
+├── style.css                   # Site styling, responsive layout, and theme tokens
+├── skills-config.js            # Skills, objectives, implementation notes, and metrics
+├── assets/                     # Logo assets used by the skills marquee
+│   ├── aws-icons/              # AWS architecture icons
+│   ├── airflow-logo.png
+│   ├── argocd-logo.png
+│   └── dataiku-logo.svg
+├── cv.pdf                      # CV / resume linked from the site
+├── studentshipdeck.pdf         # KCL FoLSM studentship deck
+└── README.md
 ```
 
----
+## Content
+
+- **Home**: hero introduction, skills marquee, featured projects, and contact CTA
+- **Skills**: constellation map of cloud, platform, and language skills
+- **Projects**: research and engineering work
+- **About**: bio, education, experience, certifications, CV, and contact links
+
+Most skills content lives in `skills-config.js`. The constellation reads from the `SKILLS` object, while node positions and map behavior are defined in the inline script in `index.html`.
 
 ## Design
 
-The site uses a **macOS desktop metaphor**:
+The site uses a restrained dark portfolio aesthetic with an optional light mode.
 
-- A fixed **menu bar** at the top with a live clock
-- A fixed **dock** at the bottom — each icon opens a section as a floating window
-- **About** is open by default — clean first impression for recruiters
-- All other sections (Projects, Papers, Skills, Contact) open on demand via the dock
-- Windows can be closed with the red traffic light button
-- Light macOS Sonoma aesthetic — sage green wallpaper gradient, frosted glass windows
-
----
-
-## Sections
-
-- **About** — open by default. Name, bio, credential pills, and links to GitHub, LinkedIn, email, CV
-- **Projects** — research projects: computational motion perception paper + iGEM 2022
-- **Papers** — publications and awards: Proc. R. Soc. B paper, KCL studentship, KURF fellowship, iGEM Silver Medal
-- **Skills** — stack grouped by category: Cloud & Infra, Languages, Platforms, Certifications
-- **Contact** — mailto link to emmelineliencie@gmail.com
-
----
-
-## Tech
-
-- Plain HTML + CSS — no frameworks, no build step
-- Hosted on [GitHub Pages](https://pages.github.com)
-- Fonts via [Google Fonts](https://fonts.google.com): Plus Jakarta Sans 800 (display) + IBM Plex Sans (body)
-- No external dependencies beyond Google Fonts
-
----
+- Display font: Plus Jakarta Sans 800
+- Body font: Inter
+- Theme colors are controlled by CSS variables in `style.css`
+- Primary contact buttons use a softer green in light mode
+- Mobile navigation is a left-side drawer
+- Language skills render as unlinked planet-style nodes around the constellation
 
 ## Local Development
 
-No build tools needed — open `index.html` directly in a browser:
+You can open `index.html` directly, or serve the folder locally:
 
 ```bash
-open index.html
-# or serve locally:
-python -m http.server 8000
-# then visit http://localhost:8000
+python3 -m http.server 8765
 ```
 
----
+Then visit:
+
+```text
+http://127.0.0.1:8765
+```
+
+Useful direct URLs:
+
+```text
+http://127.0.0.1:8765/#home
+http://127.0.0.1:8765/#skills
+http://127.0.0.1:8765/#projects
+http://127.0.0.1:8765/#about
+```
 
 ## Updating Content
 
-| What to change | Where |
+| Change | Where |
 |---|---|
-| Name, bio, tagline | `index.html` → `#win-about` |
-| Social / CV links | `index.html` → `.link-row` inside `#win-about` |
-| Projects | `index.html` → `#win-projects` |
-| Publications & Awards | `index.html` → `#win-publications` |
-| Skills | `index.html` → `#win-skills` |
-| Contact | `index.html` → `#win-contact` |
-| Colours & fonts | `style.css` → `:root` variables |
-| Wallpaper gradient | `style.css` → `body` background |
-
-### Colour palette
-
-All key colours are CSS variables in `style.css`:
-
-```css
-:root {
-  --accent:       #4a6741;  /* matcha green — buttons, tags, links */
-  --accent-light: rgba(74,103,65,0.1);
-  --glass-bg:     rgba(255,255,255,0.82);  /* window glass */
-  --ink:          #111111;
-  --ink-soft:     rgba(0,0,0,0.55);
-  --ink-muted:    rgba(0,0,0,0.35);
-}
-```
-
----
+| Hero copy and featured project cards | `index.html` |
+| Skills data, objectives, implementation, metrics | `skills-config.js` |
+| Skills constellation positions and connections | `index.html` |
+| Theme colors, typography, responsive layout | `style.css` |
+| Marquee logo mappings | `index.html` |
+| Local logo/image assets | `assets/` |
+| CV link target | `cv.pdf` |
 
 ## Deployment
 
-Deploys automatically via GitHub Pages on every push to `main`.
+The site is designed for GitHub Pages and deploys from the repository root.
 
-To enable on a new repo:
-1. Go to **Settings → Pages**
-2. Source: **Deploy from a branch** → `main` / `/ (root)`
-3. Save — live within ~60 seconds
+To enable Pages on a new repo:
+
+1. Go to **Settings -> Pages**
+2. Source: **Deploy from a branch**
+3. Select `main` and `/ (root)`
+4. Save
+
+GitHub Pages should publish the site shortly after changes are pushed to `main`.
