@@ -216,6 +216,11 @@ html[data-theme="light"] .theme-toggle-light {
 
 .social-link:hover { color: var(--ink); }
 
+.menu-toggle,
+.drawer-overlay {
+  display: none;
+}
+
 /* ── MAIN ── */
 .main {
   margin-left: var(--sidebar-w);
@@ -801,7 +806,13 @@ html[data-theme="light"] .theme-toggle-light {
   background-size: auto, auto, 48px 48px, 48px 48px;
 }
 
-.constellation svg {
+.constellation-plane {
+  position: relative;
+  min-height: inherit;
+  width: 100%;
+}
+
+.constellation-plane svg {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -946,43 +957,170 @@ html[data-theme="light"] .theme-toggle-light {
   body { flex-direction: column; }
 
   .sidebar {
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
+    min-height: 64px;
+    bottom: auto;
     flex-direction: row;
     padding: 16px 20px;
     border-right: none;
     border-bottom: 1px solid var(--border);
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
   }
 
   .theme-toggle {
-    top: 72px;
+    top: 13px;
     right: 16px;
-    width: 116px;
+    width: 78px;
     height: 38px;
+  }
+
+  .theme-toggle-option span {
+    display: none;
+  }
+
+  .theme-toggle-option {
+    gap: 0;
   }
 
   .sidebar-top {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 14px;
+    width: 100%;
+    padding-right: 94px;
   }
 
   .logo { margin-bottom: 0; }
 
-  .nav-links { flex-direction: row; gap: 4px; }
+  .menu-toggle {
+    display: inline-flex;
+    width: 38px;
+    height: 38px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 6px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg-card);
+    color: var(--ink);
+    cursor: pointer;
+  }
+
+  .menu-toggle span {
+    width: 16px;
+    height: 1px;
+    background: currentColor;
+    transition: transform 0.18s, opacity 0.18s;
+  }
+
+  body.drawer-open .menu-toggle span:first-child {
+    transform: translateY(3.5px) rotate(45deg);
+  }
+
+  body.drawer-open .menu-toggle span:last-child {
+    transform: translateY(-3.5px) rotate(-45deg);
+  }
+
+  .drawer-overlay {
+    display: block;
+    position: fixed;
+    inset: 64px 0 0;
+    z-index: 90;
+    background: rgba(0,0,0,0.42);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .drawer-overlay::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: min(320px, 84vw);
+    background: var(--bg);
+    border-right: 1px solid var(--border);
+    box-shadow: 24px 0 60px rgba(0,0,0,0.24);
+    transform: translateX(-100%);
+    transition: transform 0.24s ease;
+  }
+
+  body.drawer-open .drawer-overlay {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  body.drawer-open .drawer-overlay::before {
+    transform: translateX(0);
+  }
+
+  .nav-links,
+  .sidebar-socials {
+    position: fixed;
+    left: 0;
+    z-index: 110;
+    width: min(320px, 84vw);
+    transform: translateX(-100%);
+    transition: transform 0.24s ease;
+  }
+
+  body.drawer-open .nav-links,
+  body.drawer-open .sidebar-socials {
+    transform: translateX(0);
+  }
+
+  .nav-links {
+    top: 96px;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0 22px;
+  }
+
+  .nav-link {
+    font-size: 15px;
+    padding: 11px 12px;
+  }
+
+  .sidebar-socials {
+    top: auto;
+    bottom: 32px;
+    padding: 0 22px;
+  }
 
   .main { margin-left: 0; }
 
-  .section { padding: 40px 24px 60px; }
+  .section { padding: 104px 24px 60px; }
 
   .project-grid { grid-template-columns: 1fr; }
 
   .project-list-item { grid-template-columns: 100px 1fr; }
   .pli-img { height: 80px; }
 
-  .constellation { min-height: 560px; }
+  .constellation {
+    min-height: 560px;
+    overflow: hidden;
+  }
+
+  .skill-node {
+    gap: 4px;
+    max-width: 92px;
+    padding: 6px 7px;
+    font-size: 8.5px;
+    line-height: 1.2;
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  .skill-node::before {
+    width: 6px;
+    height: 6px;
+  }
 
   .exp-item { grid-template-columns: 80px 1fr; gap: 14px; }
 
@@ -991,6 +1129,10 @@ html[data-theme="light"] .theme-toggle-light {
 
 @media (max-width: 480px) {
   .theme-toggle {
-    top: 124px;
+    width: 74px;
+  }
+
+  .sidebar-top {
+    padding-right: 90px;
   }
 }
